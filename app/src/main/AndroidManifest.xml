@@ -4,10 +4,27 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="@xml"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MiniWarehose" />
+        android:theme="@style/Theme.MiniWarehose">
+        <activity android:name="com.miniwarehouse.ui.form.returnProductForm" />
+        <activity android:name="com.miniwarehouse.ui.form.RecyclerForm" />
+        <activity android:name="com.miniwarehouse.ui.form.ShipmentForm" />
+        <activity android:name="com.miniwarehouse.ui.form.PackedForm" />
+        <activity android:name="com.miniwarehouse.ui.form.AssemblyForm" />
+        <activity android:name="com.miniwarehouse.ui.form.ProduceForm" />
+        <activity android:name="com.miniwarehouse.ui.form.PurchaseForm" />
+        <activity android:name="com.miniwarehouse.ui.menu.ShowMenu" />
+        <activity android:name="com.miniwarehouse.ui.menu.MainMenu" />
+        <activity android:name="com.miniwarehouse.ui.Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>
