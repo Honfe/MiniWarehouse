@@ -54,4 +54,13 @@
     <string name="packedPackageNumber">货物数量</string>
     <string name="packedPackageLocation">货物位置</string>
     <string name="packedPackageDetail">货物详情</string>
+    <string name="assemblyItemTitle">配件信息（单个）</string>
+    <string name="assemblyItemName">配件名称</string>
+    <string name="assemblyItemNumber">配件数量</string>
+    <string name="assemblyAddItemBtn">添加配件项</string>
+    <string name="assemblyTargetTitle">产品信息</string>
+    <string name="assemblyTargetName">产品名称</string>
+    <string name="assemblyTargetNumber">产品数量</string>
+    <string name="assemblyTargetLocation">产品位置</string>
+    <string name="assemblyTargetDetail">产品详情</string>
 </resources>
