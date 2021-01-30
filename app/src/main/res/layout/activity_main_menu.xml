@@ -63,7 +63,7 @@
             android:text="@string/intoAssemblyForm"/>
 
         <Button
-            android:id="@+id/packedBtn"
+            android:id="@+id/intoPackedBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -73,7 +73,7 @@
             android:text="@string/packed"/>
 
         <Button
-            android:id="@+id/shipmentBtn"
+            android:id="@+id/intoShipmentBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -83,7 +83,7 @@
             android:text="@string/shipment"/>
 
         <Button
-            android:id="@+id/recycleProductBtn"
+            android:id="@+id/intoRecycleProductBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -93,7 +93,7 @@
             android:text="@string/recycle"/>
 
         <Button
-            android:id="@+id/returnProductBtn"
+            android:id="@+id/intoReturnProductBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

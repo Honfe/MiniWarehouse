@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiniWarehose"
         android:name="org.litepal.LitePalApplication">
-        <activity android:name="com.miniwarehouse.ui.form.returnProductForm" />
+        <activity android:name="com.miniwarehouse.ui.form.ReturnProductForm" />
         <activity android:name="com.miniwarehouse.ui.form.RecyclerForm" />
         <activity android:name="com.miniwarehouse.ui.form.ShipmentForm" />
         <activity android:name="com.miniwarehouse.ui.form.PackedForm" />
