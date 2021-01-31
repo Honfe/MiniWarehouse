@@ -87,4 +87,8 @@
     <string name="returnFromName">退&#8197;&#8197;货&#8197;&#8197;人</string>
     <string name="returnFromDate">退货日期</string>
     <string name="returnFromDetail">退货详情</string>
+    <string name="purchase_material_item_title">原料</string>
+    <string name="purchase_parts_item_title">配件</string>
+    <string name="produce_parts_item_title">配件</string>
+    <string name="produce_product_item_title">产品</string>
 </resources>
