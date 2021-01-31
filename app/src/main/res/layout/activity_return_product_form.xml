@@ -86,14 +86,12 @@
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/returnProductLocationEdit"
+            <Spinner
+                android:id="@+id/returnProductLocationSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:inputType="text"
-                android:singleLine="true"
-                tools:ignore="Autofill,LabelFor" />
+                android:spinnerMode="dropdown" />
 
         </LinearLayout>
 

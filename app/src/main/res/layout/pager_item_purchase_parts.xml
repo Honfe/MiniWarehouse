@@ -124,6 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:lines="6"
+            android:inputType="textMultiLine"
             tools:ignore="Autofill,LabelFor,TextFields" />
 
     </LinearLayout>
@@ -134,7 +135,7 @@
         tools:ignore="UselessLeaf" />
 
     <Button
-        android:id="@+id/purchasePagerItemMaterialSubmitBtn"
+        android:id="@+id/purchasePagerItemPartsSubmitBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/submit"

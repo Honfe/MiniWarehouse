@@ -30,13 +30,13 @@
     <string name="purchasePagerItemPartsUnitText">单&#12288;&#12288;位:</string>
     <string name="purchasePagerItemPartsLocation">配件位置:</string>
     <string name="purchasePagerItemPartsDetail">配件详情:</string>
-    <string name="producePagerItemMaterialConsumeTitle">原料损耗(单个)</string>
-    <string name="producePagerItemMaterialConsumeItemName">原料名称</string>
-    <string name="producePagerItemAddMaterialConsumeItem">添加原料消耗项</string>
+    <string name="produceASMPagerMaterialConsumeTitle">原料损耗(单个)</string>
+    <string name="produceASMPagerMaterialConsumeName">原料名称</string>
+    <string name="produceAddMaterialConsumeItem">添加原料消耗项</string>
     <string name="produceASMPagerItemTargetTitle">配件信息登记</string>
     <string name="produceASMPagerItemTargetName">配件名称</string>
     <string name="produceASMPagerItemTargetNumber">配件数量</string>
-    <string name="producePagerItemMaterialConsumeItemNumber">占&#12288;&#12288;比</string>
+    <string name="produceASMMaterialConsumeNumber">占&#12288;&#12288;比</string>
     <string name="producePagerItemMaterialLoss">损&#8197;&#8197;耗&#8197;&#8197;比</string>
     <string name="produceASMPagerItemMaterialUnitWeight">配件单重</string>
     <string name="produceASMPagerItemDetail">配件详情</string>
@@ -91,4 +91,6 @@
     <string name="purchase_parts_item_title">配件</string>
     <string name="produce_parts_item_title">配件</string>
     <string name="produce_product_item_title">产品</string>
+    <string name="produceASMPagerItemLocation">配件位置</string>
+    <string name="producePDTPagerItemLocation">产品位置</string>
 </resources>

@@ -34,7 +34,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
 
         <TextView
             android:id="@+id/purchasePagerItemMaterialTypeText"
@@ -45,14 +46,12 @@
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/purchasePagerItemMaterialTypeEdit"
+        <Spinner
+            android:id="@+id/purchasePagerItemMaterialTypeSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:inputType="text"
-            android:singleLine="true"
-            tools:ignore="Autofill,LabelFor" />
+            android:spinnerMode="dropdown" />
 
     </LinearLayout>
 
@@ -84,23 +83,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/purchasePagerItemMaterialLocationText"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/purchasePagerItemMaterialLocation"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/purchasePagerItemMaterialLocationSpinner"
-            android:layout_width="0dp"
+            <TextView
+                android:id="@+id/purchasePagerItemMaterialLocationText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/purchasePagerItemMaterialLocation"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/purchasePagerItemMaterialLocationSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:spinnerMode="dropdown"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/purchasePagerItemMaterialDetailLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:spinnerMode="dropdown"/>
+            android:orientation="horizontal" />
 
     </LinearLayout>
 
@@ -124,6 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:lines="6"
+            android:inputType="textMultiLine"
             tools:ignore="Autofill,LabelFor,TextFields" />
 
     </LinearLayout>

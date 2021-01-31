@@ -9,8 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.viewpager.widget.ViewPager
 import com.miniwarehose.R
 import com.miniwarehouse.ui.adapter.CommonPagerAdapter
@@ -22,8 +21,8 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
     private lateinit var imgCursor : ImageView
     private lateinit var item_one : TextView
     private lateinit var item_two : TextView
+    private lateinit var pagerViewList : ArrayList<View>
 
-    private lateinit var pagerList : ArrayList<View>
     private var offset = 0
     private var currIdx = 0
     private var bmpWidth = 0
@@ -32,11 +31,37 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_purchase_form)
-        initViews()
+        cachePagerView()
+        initPager()
+        initSpinner()
     }
 
     @SuppressLint("InflateParams")
-    private fun initViews() {
+    private fun cachePagerView() {
+        val lyinflater : LayoutInflater = layoutInflater
+        pagerViewList = arrayListOf(
+            lyinflater.inflate(R.layout.pager_item_purchase_material, null, false),
+            lyinflater.inflate(R.layout.pager_item_purchase_parts, null, false)
+        )
+    }
+
+    private fun initSpinner() {
+        // database select result
+        // todo here
+        val typeItemList = ArrayList<String>()
+        val storageItemList = ArrayList<String>()
+        typeItemList.add("添加新类型")
+        storageItemList.add("添加新仓库")
+        // 设置Spinner
+        val typeSpinner = pagerViewList[0].findViewById<View>(R.id.purchasePagerItemMaterialTypeSpinner) as Spinner
+        typeSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, typeItemList)
+        val storageMaterialSpinner = pagerViewList[0].findViewById<View>(R.id.purchasePagerItemMaterialLocationSpinner) as Spinner
+        storageMaterialSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
+        val storagePartsSpinner = pagerViewList[1].findViewById<View>(R.id.purchasePagerItemPartsLocationSpinner) as Spinner
+        storagePartsSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
+    }
+
+    private fun initPager() {
         // 控件
         vpager = purchasePager
         item_one = purchaseMaterialItemText
@@ -53,12 +78,7 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
         // 移动距离
         one = offset * 2 + bmpWidth
         // 往ViewPager填充View，同时设置点击事件与页面切换事件
-        val lyinflater : LayoutInflater = layoutInflater
-        pagerList = arrayListOf(
-                lyinflater.inflate(R.layout.pager_item_purchase_material, null, false),
-                lyinflater.inflate(R.layout.pager_item_purchase_parts, null, false)
-        )
-        vpager.adapter = CommonPagerAdapter(pagerList)
+        vpager.adapter = CommonPagerAdapter(pagerViewList)
         vpager.currentItem = 0
 
         item_one.setOnClickListener(this)
