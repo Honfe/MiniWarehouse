@@ -30,7 +30,6 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
     private var bmpWidth = 0
     private var one = 0
 
-    @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_produce_form)

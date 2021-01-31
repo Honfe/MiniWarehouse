@@ -24,7 +24,6 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
     private lateinit var item_two : TextView
 
     private lateinit var pagerList : ArrayList<View>
-    private lateinit var adpater : CommonPagerAdapter
     private var offset = 0
     private var currIdx = 0
     private var bmpWidth = 0
@@ -59,8 +58,7 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
                 lyinflater.inflate(R.layout.pager_item_purchase_material, null, false),
                 lyinflater.inflate(R.layout.pager_item_purchase_parts, null, false)
         )
-        this.adpater = CommonPagerAdapter(pagerList)
-        vpager.adapter = this.adpater
+        vpager.adapter = CommonPagerAdapter(pagerList)
         vpager.currentItem = 0
 
         item_one.setOnClickListener(this)
