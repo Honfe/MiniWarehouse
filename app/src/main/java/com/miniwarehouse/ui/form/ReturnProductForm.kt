@@ -7,19 +7,19 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.miniwarehose.R
 
-class ShipmentForm : AppCompatActivity() {
+class ReturnProductForm : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shipment_form)
+        setContentView(R.layout.activity_return_product_form)
         initSpinner()
     }
 
     private fun initSpinner() {
         // database select result
-        val packedNameList = ArrayList<String>()
-        if (packedNameList.size > 0) {
-            val packageNameSpinner = findViewById<View>(R.id.shipmentPackageItemSpinner) as Spinner
-            packageNameSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, packedNameList)
-        }
+        // todo here
+        val storageList = ArrayList<String>()
+        storageList.add("添加新仓库")
+        val storageSpinner = findViewById<View>(R.id.returnProductLocationSpinner) as Spinner
+        storageSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageList)
     }
 }
