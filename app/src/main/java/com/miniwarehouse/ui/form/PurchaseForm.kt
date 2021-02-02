@@ -13,6 +13,8 @@ import android.widget.*
 import androidx.viewpager.widget.ViewPager
 import com.miniwarehose.R
 import com.miniwarehouse.ui.adapter.CommonPagerAdapter
+import com.miniwarehouse.ui.listener.StorageItemSelectedListener
+import com.miniwarehouse.ui.listener.TypeItemSelectedListener
 import kotlinx.android.synthetic.main.activity_purchase_form.*
 
 class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageChangeListener {
@@ -59,6 +61,10 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
         storageMaterialSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
         val storagePartsSpinner = pagerViewList[1].findViewById<View>(R.id.purchasePagerItemPartsLocationSpinner) as Spinner
         storagePartsSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
+        // 设置Spinner选择事件监听
+        typeSpinner.onItemSelectedListener = TypeItemSelectedListener(this, pagerViewList[0], R.id.dynamicLayoutTypeSpinner)
+        storageMaterialSpinner.onItemSelectedListener = StorageItemSelectedListener(this, pagerViewList[0], R.id.dynamicLayoutMaterialStorageSpinner)
+        storagePartsSpinner.onItemSelectedListener = StorageItemSelectedListener(this, pagerViewList[1], R.id.dynamicLayoutPartsStorageSpinner)
     }
 
     private fun initPager() {

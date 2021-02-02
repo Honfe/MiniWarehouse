@@ -32,26 +32,34 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/dynamicLayoutTypeSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="UselessParent">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/purchasePagerItemMaterialTypeText"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/purchasePagerItemMaterialType"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
 
-        <Spinner
-            android:id="@+id/purchasePagerItemMaterialTypeSpinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:spinnerMode="dropdown" />
+            <TextView
+                android:id="@+id/purchasePagerItemMaterialTypeText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/purchasePagerItemMaterialType"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/purchasePagerItemMaterialTypeSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -81,6 +89,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/dynamicLayoutMaterialStorageSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

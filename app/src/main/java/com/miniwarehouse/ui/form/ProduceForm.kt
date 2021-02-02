@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.miniwarehose.R
 import com.miniwarehouse.ui.adapter.CommonPagerAdapter
+import com.miniwarehouse.ui.listener.StorageItemSelectedListener
 import kotlinx.android.synthetic.main.activity_produce_form.*
 
 class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageChangeListener {
@@ -65,6 +66,10 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
         val PDTlocationSpinner = pagerViewList[1].findViewById<View>(R.id.producePDTPagerItemLocationSpinner) as Spinner
         ASMlocationSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
         PDTlocationSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
+        // 设置Spinner选择事件监听
+        ASMlocationSpinner.onItemSelectedListener = StorageItemSelectedListener(this, pagerViewList[0], R.id.dynamicLayoutProduceAssemblyStorageSpinner)
+        PDTlocationSpinner.onItemSelectedListener = StorageItemSelectedListener(this, pagerViewList[1], R.id.dynamicLayoutProducePartsStorageSpinner)
+
     }
 
     private fun initPager() {
