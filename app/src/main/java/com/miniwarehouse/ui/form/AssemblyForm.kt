@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import com.miniwarehose.R
+import com.miniwarehouse.ui.listener.AddItemClickListener
 import com.miniwarehouse.ui.listener.StorageItemSelectedListener
 
 class AssemblyForm : AppCompatActivity() {
 
     private lateinit var selfLayout : View
+    private lateinit var addItemComponent : ArrayList<View>
 
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +22,17 @@ class AssemblyForm : AppCompatActivity() {
         selfLayout = layoutInflater.inflate(R.layout.activity_assembly_form, null, false)
         setContentView(selfLayout)
         initSpinner()
+        initButton()
+    }
+
+    private fun initButton() {
+        val addItemButton = selfLayout.findViewById<View>(R.id.assemblyAddItemBtn) as Button
+        val addItemBtnListener = AddItemClickListener(this, selfLayout.findViewById<View>(R.id.dynamicAssemblyAddItem))
+                .addSpinnerLine("配件名称")
+                .addEditLine("配件数量")
+                .finish()
+        addItemButton.setOnClickListener(addItemBtnListener)
+        addItemComponent = addItemBtnListener.getComponent()
     }
 
     private fun initSpinner() {
