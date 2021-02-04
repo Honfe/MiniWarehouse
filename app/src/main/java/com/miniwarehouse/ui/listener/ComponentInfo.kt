@@ -8,4 +8,6 @@ interface ComponentInfo {
 
     fun getComponentCount() : Int
 
+    fun getComponentItemCount() : Int
+
 }

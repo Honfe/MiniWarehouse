@@ -11,19 +11,19 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 
-class AddItemClickListener(var context: Context, var view: View)
+class AddItemClickListener(private var context: Context, private var view: View)
     : View.OnClickListener, ComponentInfo {
 
     val componentList = ArrayList<View>()
-    lateinit var layout : LinearLayout
     private val arrayItemLabelList = ArrayList<String>()
     private val arrayItemNameList = ArrayList<String>()
-    var count : Int = 0
+    var itemCount : Int = 0
+    var layoutCount : Int = 0
 
     override fun onClick(v: View?) {
-        initLayout()
+        val layout = initLayout()
         var i = 0
-        while (i < arrayItemLabelList.size) {
+        while (i < itemCount) {
             layout.addView(when (arrayItemLabelList[i]) {
                 "spinner" -> spinnerLine(arrayItemNameList[i])
                 "edit" -> editLine(arrayItemNameList[i])
@@ -33,13 +33,7 @@ class AddItemClickListener(var context: Context, var view: View)
             ++i
         }
         addComponent(layout)
-        Log.d("hhh", "here")
-    }
-
-    fun initLayout() {
-        layout = LinearLayout(context)
-        layout.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        layout.orientation = LinearLayout.VERTICAL
+        ++layoutCount
     }
 
     fun addSpinnerLine(item : String): AddItemClickListener {
@@ -61,6 +55,7 @@ class AddItemClickListener(var context: Context, var view: View)
     }
 
     fun finish(): AddItemClickListener {
+        itemCount = arrayItemLabelList.size
         return this
     }
 
@@ -69,7 +64,18 @@ class AddItemClickListener(var context: Context, var view: View)
     }
 
     override fun getComponentCount(): Int {
-        return 1
+        return layoutCount
+    }
+
+    override fun getComponentItemCount(): Int {
+        return itemCount
+    }
+
+    private fun initLayout(): LinearLayout {
+        val layout = LinearLayout(context)
+        layout.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        layout.orientation = LinearLayout.VERTICAL
+        return layout
     }
 
     private fun spinnerLine(item : String): LinearLayout {
