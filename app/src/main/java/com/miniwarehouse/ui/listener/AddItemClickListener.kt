@@ -2,7 +2,6 @@ package com.miniwarehouse.ui.listener
 
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -16,7 +15,7 @@ class AddItemClickListener(private var context: Context, private var view: View)
 
     val componentList = ArrayList<View>()
     private val arrayItemLabelList = ArrayList<String>()
-    private val arrayItemNameList = ArrayList<String>()
+    private val arrayItemTitleList = ArrayList<String>()
     var itemCount : Int = 0
     var layoutCount : Int = 0
 
@@ -25,9 +24,9 @@ class AddItemClickListener(private var context: Context, private var view: View)
         var i = 0
         while (i < itemCount) {
             layout.addView(when (arrayItemLabelList[i]) {
-                "spinner" -> spinnerLine(arrayItemNameList[i])
-                "edit" -> editLine(arrayItemNameList[i])
-                "multiEdit" ->editMultiLine(arrayItemNameList[i])
+                "spinner" -> spinnerLine(arrayItemTitleList[i])
+                "edit" -> editLine(arrayItemTitleList[i])
+                "multiEdit" ->editMultiLine(arrayItemTitleList[i])
                 else -> null
             })
             ++i
@@ -37,19 +36,19 @@ class AddItemClickListener(private var context: Context, private var view: View)
     }
 
     fun addSpinnerLine(item : String): AddItemClickListener {
-        arrayItemNameList.add(item)
+        arrayItemTitleList.add(item)
         arrayItemLabelList.add("spinner")
         return this
     }
 
     fun addEditLine(item : String): AddItemClickListener {
-        arrayItemNameList.add(item)
+        arrayItemTitleList.add(item)
         arrayItemLabelList.add("edit")
         return this
     }
 
     fun addEditMultiLine(item : String): AddItemClickListener {
-        arrayItemNameList.add(item)
+        arrayItemTitleList.add(item)
         arrayItemLabelList.add("multiEdit")
         return this
     }
