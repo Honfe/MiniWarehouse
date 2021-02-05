@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.Spinner
 import com.miniwarehose.R
 import com.miniwarehouse.ui.listener.AddItemClickListener
-import com.miniwarehouse.ui.listener.StorageItemSelectedListener
+import com.miniwarehouse.ui.listener.OtherItemSelectedListener
 
 class AssemblyForm : AppCompatActivity() {
 
@@ -49,7 +49,11 @@ class AssemblyForm : AppCompatActivity() {
         val storageSpinner = findViewById<View>(R.id.assemblyProductLocationSpinner) as Spinner
         storageSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageList)
         // 设置Spinner选择监听器
-        storageSpinner.onItemSelectedListener = StorageItemSelectedListener(this, selfLayout, R.id.dynamicLayoutAssemblyStorageSpinner)
+        val storageItemSelectedListener = OtherItemSelectedListener(this, selfLayout, R.id.dynamicLayoutAssemblyStorageSpinner)
+                .addEditLine("新仓库名称")
+                .addEditMultiLine("新仓库详情")
+                .finish()
+        storageSpinner.onItemSelectedListener = storageItemSelectedListener
     }
 
 }

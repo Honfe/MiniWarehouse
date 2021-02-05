@@ -14,7 +14,7 @@ import androidx.viewpager.widget.ViewPager
 import com.miniwarehose.R
 import com.miniwarehouse.ui.adapter.CommonPagerAdapter
 import com.miniwarehouse.ui.listener.AddItemClickListener
-import com.miniwarehouse.ui.listener.StorageItemSelectedListener
+import com.miniwarehouse.ui.listener.OtherItemSelectedListener
 import kotlinx.android.synthetic.main.activity_produce_form.*
 
 class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageChangeListener {
@@ -68,9 +68,16 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
         ASMlocationSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
         PDTlocationSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
         // 设置Spinner选择事件监听
-        ASMlocationSpinner.onItemSelectedListener = StorageItemSelectedListener(this, pagerViewList[0], R.id.dynamicLayoutProduceAssemblyStorageSpinner)
-        PDTlocationSpinner.onItemSelectedListener = StorageItemSelectedListener(this, pagerViewList[1], R.id.dynamicLayoutProducePartsStorageSpinner)
-
+        val ASMlocationListener = OtherItemSelectedListener(this, pagerViewList[0], R.id.dynamicLayoutProduceAssemblyStorageSpinner)
+                .addEditLine("新仓库名称")
+                .addEditMultiLine("新仓库详情")
+                .finish()
+        ASMlocationSpinner.onItemSelectedListener = ASMlocationListener
+        val PDTlocationListner = OtherItemSelectedListener(this, pagerViewList[1], R.id.dynamicLayoutProducePartsStorageSpinner)
+                .addEditLine("新仓库名称")
+                .addEditMultiLine("新仓库详情")
+                .finish()
+        PDTlocationSpinner.onItemSelectedListener = PDTlocationListner
     }
 
     private fun initButton() {

@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.miniwarehose.R
-import com.miniwarehouse.ui.listener.StorageItemSelectedListener
+import com.miniwarehouse.ui.listener.OtherItemSelectedListener
 
 class RecyclerForm : AppCompatActivity() {
 
@@ -33,6 +33,10 @@ class RecyclerForm : AppCompatActivity() {
         val storageSpinner = findViewById<View>(R.id.recycleToMaterialLocationSpinner) as Spinner
         storageSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageList)
         // 设置Spinner选择监听器
-        storageSpinner.onItemSelectedListener = StorageItemSelectedListener(this, selfLayout, R.id.dynamicLayoutRecycleLocationSpinner)
+        val storageItemSelectedListener = OtherItemSelectedListener(this, selfLayout, R.id.dynamicLayoutRecycleLocationSpinner)
+                .addEditLine("新仓库名称")
+                .addEditMultiLine("新仓库详情")
+                .finish()
+        storageSpinner.onItemSelectedListener = storageItemSelectedListener
     }
 }
