@@ -9,13 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.viewpager.widget.ViewPager
 import com.miniwarehose.R
 import com.miniwarehouse.ui.adapter.CommonPagerAdapter
+import com.miniwarehouse.ui.listener.AddItemClickListener
+import com.miniwarehouse.ui.listener.OtherItemSelectedListener
 import kotlinx.android.synthetic.main.activity_produce_form.*
 
 class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageChangeListener {
@@ -24,6 +23,8 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
     private lateinit var imgCursor : ImageView
     private lateinit var item_one : TextView
     private lateinit var item_two : TextView
+    private lateinit var addItem1Component : ArrayList<View>
+    private lateinit var addItem2Component : ArrayList<View>
 
     private lateinit var pagerViewList : ArrayList<View>
     private var offset = 0
@@ -37,6 +38,7 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
         cachePagerView()
         initSpinner()
         initPager()
+        initButton()
     }
 
     @SuppressLint("InflateParams")
@@ -65,6 +67,36 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
         val PDTlocationSpinner = pagerViewList[1].findViewById<View>(R.id.producePDTPagerItemLocationSpinner) as Spinner
         ASMlocationSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
         PDTlocationSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
+        // 设置Spinner选择事件监听
+        val ASMlocationListener = OtherItemSelectedListener(this, pagerViewList[0], R.id.dynamicLayoutProduceAssemblyStorageSpinner)
+                .addEditLine("新仓库名称")
+                .addEditMultiLine("新仓库详情")
+                .finish()
+        ASMlocationSpinner.onItemSelectedListener = ASMlocationListener
+        val PDTlocationListner = OtherItemSelectedListener(this, pagerViewList[1], R.id.dynamicLayoutProducePartsStorageSpinner)
+                .addEditLine("新仓库名称")
+                .addEditMultiLine("新仓库详情")
+                .finish()
+        PDTlocationSpinner.onItemSelectedListener = PDTlocationListner
+    }
+
+    private fun initButton() {
+        // 配件页面添加项目
+        val ASMAddItemButton = pagerViewList[0].findViewById<View>(R.id.produceASMAddMaterialConsumeItem) as Button
+        val ASMAddButtonListener = AddItemClickListener(this, pagerViewList[0].findViewById<View>(R.id.dynamicLayoutProduceASMAddItem))
+                .addSpinnerLine("原料名称", arrayListOf("双E55"))
+                .addEditLine("占        比")
+                .finish()
+        ASMAddItemButton.setOnClickListener(ASMAddButtonListener)
+        addItem1Component = ASMAddButtonListener.getComponent()
+        // 产品页面添加项目
+        val PDTAddItemButton = pagerViewList[1].findViewById<View>(R.id.producePDTAddMaterialConsumeItem) as Button
+        val PDTAddButtonListener = AddItemClickListener(this, pagerViewList[1].findViewById<View>(R.id.dynamicLayoutProducePDTAddItem))
+                .addSpinnerLine("原料名称", arrayListOf())
+                .addEditLine("占        比")
+                .finish()
+        PDTAddItemButton.setOnClickListener(PDTAddButtonListener)
+        addItem2Component = PDTAddButtonListener.getComponent()
     }
 
     private fun initPager() {

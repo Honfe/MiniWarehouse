@@ -13,6 +13,7 @@ import android.widget.*
 import androidx.viewpager.widget.ViewPager
 import com.miniwarehose.R
 import com.miniwarehouse.ui.adapter.CommonPagerAdapter
+import com.miniwarehouse.ui.listener.OtherItemSelectedListener
 import kotlinx.android.synthetic.main.activity_purchase_form.*
 
 class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageChangeListener {
@@ -51,7 +52,9 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
         val typeItemList = ArrayList<String>()
         val storageItemList = ArrayList<String>()
         typeItemList.add("添加新类型")
+        typeItemList.add("其他")
         storageItemList.add("添加新仓库")
+        storageItemList.add("其他")
         // 设置Spinner
         val typeSpinner = pagerViewList[0].findViewById<View>(R.id.purchasePagerItemMaterialTypeSpinner) as Spinner
         typeSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, typeItemList)
@@ -59,6 +62,21 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
         storageMaterialSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
         val storagePartsSpinner = pagerViewList[1].findViewById<View>(R.id.purchasePagerItemPartsLocationSpinner) as Spinner
         storagePartsSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, storageItemList)
+        // 设置Spinner选择事件监听
+        val typeItemSelectedListener = OtherItemSelectedListener(this, pagerViewList[0], R.id.dynamicLayoutTypeSpinner)
+                .addEditLine("新类型名称")
+                .finish()
+        typeSpinner.onItemSelectedListener = typeItemSelectedListener
+        val storageASMItemSelectedListener = OtherItemSelectedListener(this, pagerViewList[0], R.id.dynamicLayoutMaterialStorageSpinner)
+                .addEditLine("新仓库名称")
+                .addEditMultiLine("新仓库详情")
+                .finish()
+        storageMaterialSpinner.onItemSelectedListener = storageASMItemSelectedListener
+        val storagePRTItemSelectedListner = OtherItemSelectedListener(this, pagerViewList[1], R.id.dynamicLayoutPartsStorageSpinner)
+                .addEditLine("新仓库名称")
+                .addEditMultiLine("新仓库详情")
+                .finish()
+        storagePartsSpinner.onItemSelectedListener = storagePRTItemSelectedListner
     }
 
     private fun initPager() {
