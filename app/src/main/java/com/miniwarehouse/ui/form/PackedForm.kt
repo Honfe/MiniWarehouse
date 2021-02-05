@@ -28,7 +28,7 @@ class PackedForm : AppCompatActivity() {
     private fun initButton() {
         val addItemButton = selfLayout.findViewById<View>(R.id.packedAddProductBtn) as Button
         val addItemBtnListener = AddItemClickListener(this, selfLayout.findViewById<View>(R.id.dynamicLayoutParts))
-                .addSpinnerLine("产品名称")
+                .addSpinnerLine("产品名称", arrayListOf())
                 .addEditLine("产品数量")
                 .finish()
         addItemButton.setOnClickListener(addItemBtnListener)

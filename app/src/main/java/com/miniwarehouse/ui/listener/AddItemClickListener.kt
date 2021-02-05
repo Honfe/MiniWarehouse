@@ -5,10 +5,8 @@ import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
+import com.miniwarehose.R
 
 class AddItemClickListener(private var context: Context, private var view: View)
     : View.OnClickListener, ComponentInfo {
@@ -16,18 +14,22 @@ class AddItemClickListener(private var context: Context, private var view: View)
     val componentList = ArrayList<View>()
     private val arrayItemLabelList = ArrayList<String>()
     private val arrayItemTitleList = ArrayList<String>()
+    private val arrayItemSpinnerDataList = ArrayList<ArrayList<String>>()
+    val arrayItemSpinnerDataListener = ArrayList<ItemSelectedListener?>()
+    var dataListCount : Int = 0
     var itemCount : Int = 0
     var layoutCount : Int = 0
+
 
     override fun onClick(v: View?) {
         val layout = initLayout()
         var i = 0
+        var listIdx = 0
         while (i < itemCount) {
             layout.addView(when (arrayItemLabelList[i]) {
-                "spinner" -> spinnerLine(arrayItemTitleList[i])
+                "spinner" -> spinnerLine(arrayItemTitleList[i], listIdx++)
                 "edit" -> editLine(arrayItemTitleList[i])
-                "multiEdit" ->editMultiLine(arrayItemTitleList[i])
-                else -> null
+                else ->editMultiLine(arrayItemTitleList[i])
             })
             ++i
         }
@@ -35,9 +37,11 @@ class AddItemClickListener(private var context: Context, private var view: View)
         ++layoutCount
     }
 
-    fun addSpinnerLine(item : String): AddItemClickListener {
+    fun addSpinnerLine(item : String, list : ArrayList<String>): AddItemClickListener {
         arrayItemTitleList.add(item)
         arrayItemLabelList.add("spinner")
+        arrayItemSpinnerDataList.add(list)
+        ++dataListCount
         return this
     }
 
@@ -56,6 +60,10 @@ class AddItemClickListener(private var context: Context, private var view: View)
     fun finish(): AddItemClickListener {
         itemCount = arrayItemLabelList.size
         return this
+    }
+
+    fun getListenerList(): ArrayList<ItemSelectedListener?> {
+        return arrayItemSpinnerDataListener
     }
 
     override fun getComponent(): ArrayList<View> {
@@ -77,7 +85,7 @@ class AddItemClickListener(private var context: Context, private var view: View)
         return layout
     }
 
-    private fun spinnerLine(item : String): LinearLayout {
+    private fun spinnerLine(item : String, idx : Int): LinearLayout {
         val layoutItem = LinearLayout(context)
         layoutItem.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         layoutItem.orientation = LinearLayout.HORIZONTAL
@@ -91,6 +99,16 @@ class AddItemClickListener(private var context: Context, private var view: View)
         // 下拉框
         val spinnerItem = Spinner(context)
         spinnerItem.layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 3.0F)
+        // 添加响应事件
+        val itemSelectedListener = ItemSelectedListener()
+        if (arrayItemSpinnerDataList[idx].size > 0) {
+            spinnerItem.adapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, arrayItemSpinnerDataList[idx])
+            spinnerItem.onItemSelectedListener = itemSelectedListener
+            arrayItemSpinnerDataListener.add(itemSelectedListener)
+        }
+        else {
+            arrayItemSpinnerDataListener.add(null)
+        }
         layoutItem.addView(spinnerItem)
         // 添加入项
         return layoutItem

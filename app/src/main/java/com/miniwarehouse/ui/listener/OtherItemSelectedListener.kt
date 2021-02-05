@@ -9,7 +9,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 
 class OtherItemSelectedListener(private val context: Context, private val view: View, private val id: Int)
-    : AdapterView.OnItemSelectedListener, ComponentInfo {
+    : ItemSelectedListener(), ComponentInfo {
 
     private var addItem : Boolean = false
     private var firstClick : Boolean = true
@@ -21,6 +21,10 @@ class OtherItemSelectedListener(private val context: Context, private val view: 
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (parent != null) {
+            update(parent, position)
+            if (itemCount <= 0) {
+                return
+            }
             if (parent.count == position + 1) {
                 if (!addItem) {
                     if (firstClick) {

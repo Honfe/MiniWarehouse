@@ -28,7 +28,7 @@ class AssemblyForm : AppCompatActivity() {
     private fun initButton() {
         val addItemButton = selfLayout.findViewById<View>(R.id.assemblyAddItemBtn) as Button
         val addItemBtnListener = AddItemClickListener(this, selfLayout.findViewById<View>(R.id.dynamicAssemblyAddItem))
-                .addSpinnerLine("配件名称")
+                .addSpinnerLine("配件名称", arrayListOf())
                 .addEditLine("配件数量")
                 .finish()
         addItemButton.setOnClickListener(addItemBtnListener)

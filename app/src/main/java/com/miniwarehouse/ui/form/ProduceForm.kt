@@ -84,7 +84,7 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
         // 配件页面添加项目
         val ASMAddItemButton = pagerViewList[0].findViewById<View>(R.id.produceASMAddMaterialConsumeItem) as Button
         val ASMAddButtonListener = AddItemClickListener(this, pagerViewList[0].findViewById<View>(R.id.dynamicLayoutProduceASMAddItem))
-                .addSpinnerLine("原料名称")
+                .addSpinnerLine("原料名称", arrayListOf("双E55"))
                 .addEditLine("占        比")
                 .finish()
         ASMAddItemButton.setOnClickListener(ASMAddButtonListener)
@@ -92,7 +92,7 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
         // 产品页面添加项目
         val PDTAddItemButton = pagerViewList[1].findViewById<View>(R.id.producePDTAddMaterialConsumeItem) as Button
         val PDTAddButtonListener = AddItemClickListener(this, pagerViewList[1].findViewById<View>(R.id.dynamicLayoutProducePDTAddItem))
-                .addSpinnerLine("原料名称")
+                .addSpinnerLine("原料名称", arrayListOf())
                 .addEditLine("占        比")
                 .finish()
         PDTAddItemButton.setOnClickListener(PDTAddButtonListener)

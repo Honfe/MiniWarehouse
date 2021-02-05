@@ -27,7 +27,7 @@ class ShipmentForm : AppCompatActivity() {
     private fun initButton() {
         val addItemButton = selfLayout.findViewById<View>(R.id.shipmentAddPackageItemBtn) as Button
         val addItemBtnListener = AddItemClickListener(this, selfLayout.findViewById<View>(R.id.dynamicShipmentLayout))
-                .addSpinnerLine("货物名称")
+                .addSpinnerLine("货物名称", arrayListOf())
                 .addEditLine("货物数量")
                 .addEditMultiLine("货物备注")
                 .finish()
