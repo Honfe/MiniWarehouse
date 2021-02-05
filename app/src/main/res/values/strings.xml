@@ -99,4 +99,5 @@
     <string name="inputAssemblyName">请输入配件名称</string>
     <string name="inputProductName">请输入产品名称</string>
     <string name="inputRecvrName">请输入收货人</string>
+    <string name="nothing">无内容</string>
 </resources>
