@@ -93,4 +93,10 @@
     <string name="produce_product_item_title">产品</string>
     <string name="produceASMPagerItemLocation">配件位置</string>
     <string name="producePDTPagerItemLocation">产品位置</string>
+    <string name="inputMaterialName">请输入原料名称</string>
+    <string name="search">查找</string>
+    <string name="inputPackedName">请输入货物名称</string>
+    <string name="inputAssemblyName">请输入配件名称</string>
+    <string name="inputProductName">请输入产品名称</string>
+    <string name="inputRecvrName">请输入收货人</string>
 </resources>

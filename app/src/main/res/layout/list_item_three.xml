@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:androi="http://schemas.android.com/apk/res/android"
+    androi:layout_width="match_parent"
+    androi:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    androi:orientation="vertical">
+
+    <LinearLayout
+        androi:layout_width="match_parent"
+        androi:layout_height="wrap_content"
+        androi:orientation="horizontal">
+
+        <TextView
+            androi:id="@+id/line1_item1"
+            androi:layout_width="0dp"
+            androi:layout_height="wrap_content"
+            androi:layout_weight="3"
+            androi:textColor="@color/black"
+            androi:textSize="20sp"/>
+
+        <TextView
+            androi:id="@+id/line1_item2"
+            androi:layout_width="0dp"
+            androi:layout_height="wrap_content"
+            androi:layout_weight="2"
+            androi:textColor="@color/black"
+            androi:textSize="20sp"/>
+
+        <TextView
+            androi:id="@+id/line1_item3"
+            androi:layout_width="0dp"
+            androi:layout_height="wrap_content"
+            androi:layout_weight="2"
+            androi:textColor="@color/black"
+            androi:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        androi:layout_width="match_parent"
+        androi:layout_height="wrap_content"
+        androi:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <TextView
+            androi:id="@+id/line2_item1"
+            androi:layout_width="0dp"
+            androi:layout_height="wrap_content"
+            androi:layout_weight="1"
+            androi:textColor="@color/black"
+            androi:textSize="20sp"/>
+
+        <TextView
+            androi:id="@+id/line2_item2"
+            androi:layout_width="0dp"
+            androi:layout_height="wrap_content"
+            androi:layout_weight="2"
+            androi:textColor="@color/black"
+            androi:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        androi:layout_width="match_parent"
+        androi:layout_height="wrap_content"
+        androi:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <TextView
+            androi:id="@+id/line3_item1"
+            androi:layout_width="0dp"
+            androi:layout_height="wrap_content"
+            androi:layout_weight="1"
+            androi:textColor="@color/black"
+            androi:textSize="20sp"/>
+
+        <TextView
+            androi:id="@+id/line3_item2"
+            androi:layout_width="0dp"
+            androi:layout_height="wrap_content"
+            androi:layout_weight="2"
+            androi:textColor="@color/black"
+            androi:textSize="20sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
