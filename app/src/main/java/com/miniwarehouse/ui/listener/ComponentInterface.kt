@@ -2,7 +2,7 @@ package com.miniwarehouse.ui.listener
 
 import android.view.View
 
-interface ComponentInfo {
+interface ComponentInterface {
 
     fun getComponent() : ArrayList<View>
 

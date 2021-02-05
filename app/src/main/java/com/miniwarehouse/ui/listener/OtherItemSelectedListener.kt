@@ -9,7 +9,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 
 class OtherItemSelectedListener(private val context: Context, private val view: View, private val id: Int)
-    : ItemSelectedListener(), ComponentInfo {
+    : ItemSelectedListener(), ComponentInterface {
 
     private var addItem : Boolean = false
     private var firstClick : Boolean = true

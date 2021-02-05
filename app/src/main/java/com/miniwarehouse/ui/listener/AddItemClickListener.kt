@@ -9,7 +9,7 @@ import android.widget.*
 import com.miniwarehose.R
 
 class AddItemClickListener(private var context: Context, private var view: View)
-    : View.OnClickListener, ComponentInfo {
+    : View.OnClickListener, ComponentInterface {
 
     val componentList = ArrayList<View>()
     private val arrayItemLabelList = ArrayList<String>()
