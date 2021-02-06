@@ -32,6 +32,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/packedNothing"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
@@ -47,11 +48,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/packedSomething"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/packedListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

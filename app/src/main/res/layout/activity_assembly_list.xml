@@ -32,6 +32,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/assemblyNothing"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
@@ -47,12 +48,14 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/assemblySomething"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="visible">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/assemblyListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
