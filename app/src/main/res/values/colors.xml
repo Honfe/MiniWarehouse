@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="textBackgroud">#C5CAE9</color>
     <color name="nothingText">#9FA8DA</color>
+    <color name="item_content">#E5ECF3</color>
+    <color name="item_title">#B4BBC1</color>
 </resources>

@@ -1,86 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:androi="http://schemas.android.com/apk/res/android"
-    androi:layout_width="match_parent"
-    androi:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    androi:orientation="vertical">
+    android:orientation="vertical">
 
     <LinearLayout
-        androi:layout_width="match_parent"
-        androi:layout_height="wrap_content"
-        androi:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/item_title"
+        android:orientation="horizontal">
 
         <TextView
-            androi:id="@+id/line1_item1"
-            androi:layout_width="0dp"
-            androi:layout_height="wrap_content"
-            androi:layout_weight="3"
-            androi:textColor="@color/black"
-            androi:textSize="20sp"/>
+            android:id="@+id/line1_item1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="start"/>
 
         <TextView
-            androi:id="@+id/line1_item2"
-            androi:layout_width="0dp"
-            androi:layout_height="wrap_content"
-            androi:layout_weight="2"
-            androi:textColor="@color/black"
-            androi:textSize="20sp"/>
+            android:id="@+id/line1_item2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="center"/>
 
         <TextView
-            androi:id="@+id/line1_item3"
-            androi:layout_width="0dp"
-            androi:layout_height="wrap_content"
-            androi:layout_weight="2"
-            androi:textColor="@color/black"
-            androi:textSize="20sp"/>
+            android:id="@+id/line1_item3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="end" />
 
     </LinearLayout>
 
     <LinearLayout
-        androi:layout_width="match_parent"
-        androi:layout_height="wrap_content"
-        androi:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/item_content"
         tools:ignore="UselessParent">
 
         <TextView
-            androi:id="@+id/line2_item1"
-            androi:layout_width="0dp"
-            androi:layout_height="wrap_content"
-            androi:layout_weight="1"
-            androi:textColor="@color/black"
-            androi:textSize="20sp"/>
+            android:id="@+id/line2_item1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="start"
+            android:background="@color/item_title"/>
 
         <TextView
-            androi:id="@+id/line2_item2"
-            androi:layout_width="0dp"
-            androi:layout_height="wrap_content"
-            androi:layout_weight="2"
-            androi:textColor="@color/black"
-            androi:textSize="20sp"/>
+            android:id="@+id/line2_item2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="start"/>
 
     </LinearLayout>
 
     <LinearLayout
-        androi:layout_width="match_parent"
-        androi:layout_height="wrap_content"
-        androi:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/item_content"
         tools:ignore="UselessParent">
 
         <TextView
-            androi:id="@+id/line3_item1"
-            androi:layout_width="0dp"
-            androi:layout_height="wrap_content"
-            androi:layout_weight="1"
-            androi:textColor="@color/black"
-            androi:textSize="20sp"/>
+            android:id="@+id/line3_item1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="start"
+            android:background="@color/item_title"/>
 
         <TextView
-            androi:id="@+id/line3_item2"
-            androi:layout_width="0dp"
-            androi:layout_height="wrap_content"
-            androi:layout_weight="2"
-            androi:textColor="@color/black"
-            androi:textSize="20sp"/>
+            android:id="@+id/line3_item2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="start"/>
 
     </LinearLayout>
 
