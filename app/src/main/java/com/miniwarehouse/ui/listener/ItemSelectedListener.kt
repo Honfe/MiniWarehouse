@@ -1,13 +1,12 @@
 package com.miniwarehouse.ui.listener
 
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 
 open class ItemSelectedListener : AdapterView.OnItemSelectedListener {
 
     protected var currentSelected = 0
-    protected var currentView : String = ""
+    protected var currentInfo : String = ""
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         update(parent, position)
@@ -17,7 +16,7 @@ open class ItemSelectedListener : AdapterView.OnItemSelectedListener {
     }
 
     fun getSelectedInfo() : String {
-        return currentView
+        return currentInfo
     }
 
     fun getPosition() : Int {
@@ -26,7 +25,7 @@ open class ItemSelectedListener : AdapterView.OnItemSelectedListener {
 
     protected fun update(parent: AdapterView<*>?, position: Int) {
         if (parent != null) {
-            currentView = parent.getItemAtPosition(position) as String
+            currentInfo = parent.getItemAtPosition(position) as String
         }
         currentSelected = position
     }
