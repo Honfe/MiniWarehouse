@@ -28,7 +28,7 @@
         android:text="@string/showMaterialTable"/>
 
     <Button
-        android:id="@+id/showPartsTableBtn"
+        android:id="@+id/showAssemblyTableBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
