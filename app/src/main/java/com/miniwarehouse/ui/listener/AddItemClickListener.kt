@@ -110,6 +110,7 @@ class AddItemClickListener(private var context: Context, private var view: View)
             arrayItemSpinnerDataListener.add(null)
         }
         layoutItem.addView(spinnerItem)
+        componentList.add(spinnerItem)
         // 添加入项
         return layoutItem
     }
@@ -131,6 +132,7 @@ class AddItemClickListener(private var context: Context, private var view: View)
         editTextItem.inputType = EditorInfo.TYPE_CLASS_NUMBER
         editTextItem.isSingleLine = true
         layoutItem.addView(editTextItem)
+        componentList.add(editTextItem)
         // 添加入项目
         return layoutItem
     }
@@ -152,12 +154,13 @@ class AddItemClickListener(private var context: Context, private var view: View)
         editTextItem.inputType = EditorInfo.TYPE_TEXT_FLAG_IME_MULTI_LINE
         editTextItem.setLines(3)
         layoutItem.addView(editTextItem)
+        componentList.add(editTextItem)
         // 添加入项目
         return layoutItem
     }
 
     private fun addComponent(layout : View) {
-        componentList.add(layout)
+//        componentList.add(layout)
         val linearLayout = view as LinearLayout
         linearLayout.addView(layout)
     }
