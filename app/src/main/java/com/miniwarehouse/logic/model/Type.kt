@@ -4,7 +4,7 @@ import org.litepal.crud.LitePalSupport
 
 class Type(
     var id : Long = 0,
-    var name : String,
-    var belongTo : Int,
+    var name : String = "",
+    var belongTo : Int = 1,
     var ThingList : List<Thing> = listOf()
 ) : LitePalSupport()

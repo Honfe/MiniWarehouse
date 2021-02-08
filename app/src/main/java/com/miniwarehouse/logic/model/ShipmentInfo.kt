@@ -5,9 +5,9 @@ import java.sql.Date
 
 class ShipmentInfo(
     var id : Long = 0,
-    var name : String,
-    var date : Date,
-    var receiver : String,
-    var units : String,
+    var name : String = "",
+    var date : Date = Date.valueOf("2021-1-1"),
+    var receiver : String = "",
+    var units : String = "",
     var detail : String = ""
 ) : LitePalSupport()
