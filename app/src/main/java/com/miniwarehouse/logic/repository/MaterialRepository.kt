@@ -9,7 +9,7 @@ class MaterialRepository : RepositoryInterface {
     private lateinit var materialList : List<Thing>
 
     override fun prepareData() {
-        materialList = LitePal.where("isMaterial=?", "true").find<Thing>()
+        materialList = LitePal.where("ismaterial=?", "1").find<Thing>()
     }
 
     override fun getDataList(): List<Thing> = materialList
