@@ -48,7 +48,8 @@ class PurchaseAssemblyDbOp : DbOpBase() {
         LitePal.runInTransaction {
             val res1 = storageItem.save()
             val res2 = thing.save()
-            result = res1 && res2
+            val res3 = type.save()
+            result = res1 && res2 && res3
             result
         }
         return result
