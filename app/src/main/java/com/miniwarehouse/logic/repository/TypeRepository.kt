@@ -4,7 +4,7 @@ import com.miniwarehouse.logic.model.Type
 import org.litepal.LitePal
 import org.litepal.extension.find
 
-class TypeRepository(private var type: Int) : RepositoryInterface {
+class TypeRepository(private var type: Int = 2) : RepositoryInterface {
 
     private lateinit var typeList : List<Type>
 
