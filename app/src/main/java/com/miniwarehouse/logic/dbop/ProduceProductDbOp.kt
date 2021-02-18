@@ -8,7 +8,6 @@ import com.miniwarehouse.logic.model.Storage
 import com.miniwarehouse.logic.repository.MaterialRepository
 import com.miniwarehouse.logic.repository.StorageRepository
 import org.litepal.LitePal
-import org.litepal.extension.find
 import org.litepal.extension.runInTransaction
 import java.lang.NullPointerException
 
@@ -38,10 +37,12 @@ class ProduceProductDbOp : DbOpBase() {
         val storageSpinenr = registor.getViewItem("storage") as Spinner
         val storageContent = storageSpinenr.selectedItem as String
         var storageItem : Storage? = storageRepository.findDataByName(storageContent)
+        var newStorage = false
         if (storageItem == null) {
             val storageNameEditText = registor.getViewItem("new_storage_name") as EditText
             val storageDetailEditText = registor.getViewItem("new_storage_detail") as EditText
             storageItem = Storage(name = storageNameEditText.text.toString(), detail = storageDetailEditText.text.toString())
+            newStorage = true
         }
 
         val materialSum = (number.text.toString().toInt() * unit.text.toString().toDouble()) / lossRate.text.toString().toDouble()
@@ -87,8 +88,12 @@ class ProduceProductDbOp : DbOpBase() {
             for (item in waitToUpdateThing) {
                 result = item.save() && result
             }
-            val res = product.save()
-            result = result && res
+            val res1 = if (newStorage)
+                storageItem.save()
+            else
+                true
+            val res2 = product.save()
+            result = result && res2 && res1
             result
         }
         return result

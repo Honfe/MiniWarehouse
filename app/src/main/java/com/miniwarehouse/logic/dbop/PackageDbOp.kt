@@ -33,10 +33,12 @@ class PackageDbOp : DbOpBase() {
         val storageSpinner = registor.getViewItem("storage") as Spinner
         val storageContent = storageSpinner.selectedItem as String
         var storageItem : Storage? = storageRepository.findDataByName(storageContent)
+        var newStorage = false
         if (storageItem == null) {
             val storageNameEditText = registor.getViewItem("new_storage_name") as EditText
             val storageDetailsEditText = registor.getViewItem("new_storage_detail") as EditText
             storageItem = Storage(name = storageNameEditText.text.toString(), detail = storageDetailsEditText.text.toString())
+            newStorage = true
         }
 
         val arrayProductName = ArrayList<String>()
@@ -76,8 +78,12 @@ class PackageDbOp : DbOpBase() {
             for (item in waitToUpdateThing) {
                 result = item.save() && result
             }
-            val res = shipment.save()
-            result = result && res
+            val res1 = if (newStorage)
+                storageItem.save()
+            else
+                true
+            val res2 = shipment.save()
+            result = result && res1 && res2
             result
         }
         return result

@@ -30,10 +30,12 @@ class ReturnDbOp : DbOpBase() {
         val storageSpinner = registor.getViewItem("storage") as Spinner
         val storageContent = storageSpinner.selectedItem as String
         var storageItem : Storage? = storageRepository.findDataByName(storageContent)
+        var newStorage = false
         if (storageItem == null) {
             val storageNameEditText = registor.getViewItem("new_storage_name") as EditText
             val storageDetailEditText = registor.getViewItem("new_storage_detail") as EditText
             storageItem = Storage(name = storageNameEditText.text.toString(), detail = storageDetailEditText.text.toString())
+            newStorage = true
         }
 
         val product = Product(
@@ -53,9 +55,13 @@ class ReturnDbOp : DbOpBase() {
 
         var result = true
         LitePal.runInTransaction {
+            val res3 = if (newStorage)
+                storageItem.save()
+            else
+                true
             val res1 = product.save()
             val res2 = shipment.save()
-            result = res1 && res2
+            result = res1 && res2 && res3
             result
         }
         return result

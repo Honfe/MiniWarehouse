@@ -35,10 +35,12 @@ class PurchaseMaterialDbOp : DbOpBase() {
         val storageSpinner = registor.getViewItem("storage") as Spinner
         val storageContent = storageSpinner.selectedItem as String
         var storageItem : Storage? = storageRepository.findDataByName(storageContent)
+        var newStorage = false
         if (storageItem == null) {
             val storageNameEditText = registor.getViewItem("new_storage_name") as EditText
             val storageDetailEditText = registor.getViewItem("new_storage_detail") as EditText
             storageItem = Storage(name = storageNameEditText.text.toString(), detail = storageDetailEditText.text.toString())
+            newStorage = true
         }
 
         val material = Material(
@@ -51,7 +53,10 @@ class PurchaseMaterialDbOp : DbOpBase() {
 
         var result = false
         LitePal.runInTransaction {
-            val res1 = storageItem.save()
+            val res1 = if (newStorage)
+                storageItem.save()
+            else
+                true
             val res2 = material.save()
             result = res1 && res2
             result

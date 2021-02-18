@@ -1,6 +1,5 @@
 package com.miniwarehouse.logic.dbop
 
-import android.util.Log
 import android.widget.EditText
 import android.widget.Spinner
 import com.miniwarehouse.logic.model.Product
@@ -8,7 +7,6 @@ import com.miniwarehouse.logic.model.Storage
 import com.miniwarehouse.logic.repository.AssemblyRepository
 import com.miniwarehouse.logic.repository.StorageRepository
 import org.litepal.LitePal
-import org.litepal.extension.find
 import org.litepal.extension.runInTransaction
 
 class AssemblyDbOp : DbOpBase() {
@@ -35,10 +33,12 @@ class AssemblyDbOp : DbOpBase() {
         val storageSpinner = registor.getViewItem("storage") as Spinner
         val storageContent = storageSpinner.selectedItem as String
         var storageItem : Storage? = storageRepository.findDataByName(storageContent)
+        var newStorage = false
         if (storageItem == null) {
             val storageNameEditText = registor.getViewItem("new_storage_name") as EditText
             val storageDetailEditText = registor.getViewItem("new_storage_detail") as EditText
             storageItem = Storage(name = storageNameEditText.text.toString(), detail = storageDetailEditText.text.toString())
+            newStorage = true
         }
 
         val arrayAssemblyName = ArrayList<String>()
@@ -78,8 +78,12 @@ class AssemblyDbOp : DbOpBase() {
             for (item in waitToUpdateThing) {
                 result = item.save() && result
             }
-            val res = product.save()
-            result = result && res
+            val res1 = if (newStorage)
+                storageItem.save()
+            else
+                true
+            val res2 = product.save()
+            result = result && res1 && res2
             result
         }
         return result
