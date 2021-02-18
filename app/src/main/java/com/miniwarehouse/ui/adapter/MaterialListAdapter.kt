@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.miniwarehose.R
-import com.miniwarehouse.logic.model.Thing
+import com.miniwarehouse.logic.model.Material
 
-class MaterialListAdapter(val materialList : ArrayList<Thing>)
+class MaterialListAdapter(val materialList : ArrayList<Material>)
     : RecyclerView.Adapter<MaterialListAdapter.ViewHolder>() {
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
@@ -33,7 +33,7 @@ class MaterialListAdapter(val materialList : ArrayList<Thing>)
     override fun onBindViewHolder(holder: MaterialListAdapter.ViewHolder, position: Int) {
         val material = materialList[position]
         holder.name.text = material.name
-        holder.type.text = material.type.name
+        holder.type.text = material.type
         holder.number.text = material.number.toString()
         holder.storage.text = material.storage.name
         holder.details.text = material.detail

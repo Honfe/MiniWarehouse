@@ -2,18 +2,17 @@ package com.miniwarehouse.logic.dbop
 
 import android.widget.EditText
 import android.widget.Spinner
+import com.miniwarehouse.logic.model.Material
 import com.miniwarehouse.logic.model.Storage
-import com.miniwarehouse.logic.model.Thing
-import com.miniwarehouse.logic.model.Type
+import com.miniwarehouse.logic.repository.MaterialTypeRepository
 import com.miniwarehouse.logic.repository.StorageRepository
-import com.miniwarehouse.logic.repository.TypeRepository
 import org.litepal.LitePal
 import org.litepal.extension.runInTransaction
 
 class PurchaseMaterialDbOp : DbOpBase() {
 
     private val storageRepository = StorageRepository()
-    private val typeRepository = TypeRepository(1)
+    private val typeRepository = MaterialTypeRepository()
 
     override fun prepareData() {
         storageRepository.prepareData()
@@ -26,11 +25,11 @@ class PurchaseMaterialDbOp : DbOpBase() {
         val details = registor.getViewItem("detail") as EditText
 
         val typeSpinner = registor.getViewItem("type") as Spinner
-        val typeContent = typeSpinner.selectedItem as String
-        var typeItem : Type? = typeRepository.findDataByName(typeContent)
-        if (typeItem == null) {
+        val typeItem = if (typeSpinner.selectedItemPosition + 1 == typeSpinner.count) {
             val typeEditText = registor.getViewItem("new_type_name") as EditText
-            typeItem = Type(name = typeEditText.text.toString(), belongTo = 1)
+            typeEditText.text.toString()
+        } else {
+            typeSpinner.selectedItem.toString()
         }
 
         val storageSpinner = registor.getViewItem("storage") as Spinner
@@ -42,29 +41,26 @@ class PurchaseMaterialDbOp : DbOpBase() {
             storageItem = Storage(name = storageNameEditText.text.toString(), detail = storageDetailEditText.text.toString())
         }
 
-        val thing = Thing(
-                name = name.text.toString(),
-                type = typeItem,
-                number = number.text.toString().toDouble(),
-                isMaterial = true,
-                unit = "0.1g",
-                storage = storageItem,
-                detail = details.text.toString()
+        val material = Material(
+            name = name.text.toString(),
+            type = typeItem,
+            number = number.text.toString().toDouble(),
+            storage = storageItem,
+            detail = details.text.toString()
         )
 
         var result = false
         LitePal.runInTransaction {
-            val res1 = typeItem.save()
-            val res2 = storageItem.save()
-            val res3 = thing.save()
-            result = res1 && res2 && res3
+            val res1 = storageItem.save()
+            val res2 = material.save()
+            result = res1 && res2
             result
         }
         return result
     }
 
-    fun getTypeNameList(): ArrayList<String> = typeRepository.getDataNameList()
-
     fun getStorageNameList() : ArrayList<String> = storageRepository.getDataNameList()
+
+    fun getMaterialTypeNameList() : ArrayList<String> = typeRepository.getDataNameList()
 
 }

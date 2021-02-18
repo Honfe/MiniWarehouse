@@ -15,6 +15,7 @@ class ShipmentForm : AppCompatActivity() {
 
     private lateinit var selfLayout : View
     private lateinit var addItemComponent : ArrayList<View>
+    private var addItemCount = 1
 
     private val dbOp = ShipmentDbOp()
 
@@ -43,11 +44,12 @@ class ShipmentForm : AppCompatActivity() {
                 .finish()
         addItemButton.setOnClickListener(addItemBtnListener)
         addItemComponent = addItemBtnListener.getComponent()
+        addItemCount = addItemBtnListener.getComponentItemCount()
     }
 
     private fun initSpinner() {
         // database select result
-        val packedNameList = ArrayList<String>()
+        val packedNameList = dbOp.getGoodsNameList()
         if (packedNameList.size > 0) {
             val packageNameSpinner = findViewById<View>(R.id.shipmentPackageItemSpinner) as Spinner
             packageNameSpinner.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, packedNameList)
@@ -64,14 +66,14 @@ class ShipmentForm : AppCompatActivity() {
 
     @SuppressLint("CutPasteId")
     private fun loadDynamicComponent() {
-        dbOp.setDynamicComponent(addItemComponent.size)
+        dbOp.setDynamicComponent(addItemComponent.size / addItemCount)
         val goodsMap = mutableMapOf<String, View>(
                 "new_goods_name_0" to selfLayout.findViewById(R.id.shipmentPackageItemSpinner) as Spinner,
                 "new_goods_number_0" to selfLayout.findViewById(R.id.shipmentPackageItemNumberEdit),
                 "new_goods_detail_0" to selfLayout.findViewById(R.id.shipmentPackageItemDetialEdit)
         )
         var i = 0
-        while (++i < addItemComponent.size / 3) {
+        while (++i < addItemComponent.size / addItemCount) {
             goodsMap["new_goods_name_$i"] = addItemComponent[(i - 1) * 3]
             goodsMap["new_goods_number_$i"] = addItemComponent[(i - 1) * 3 + 1]
             goodsMap["new_goods_detail_$i"] = addItemComponent[(i - 1) * 3 + 2]

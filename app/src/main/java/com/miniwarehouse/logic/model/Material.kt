@@ -2,13 +2,11 @@ package com.miniwarehouse.logic.model
 
 import org.litepal.crud.LitePalSupport
 
-class Thing(
+class Material(
     var id : Long = 0,
     var name : String = "",
-    var type : Type = Type(),
+    var type : String = "",
     var number : Double = 0.0,
-    var isMaterial : Boolean = false,
-    var unit : String = "",
     var storage : Storage = Storage(),
-    var detail : String = "",
+    var detail : String = ""
 ) : LitePalSupport()

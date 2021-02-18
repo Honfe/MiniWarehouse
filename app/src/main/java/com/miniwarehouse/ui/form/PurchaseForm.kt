@@ -67,7 +67,7 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
 
     private fun initSpinner() {
         // database select result
-        val typeItemList = pager1_db.getTypeNameList()
+        val typeItemList = pager1_db.getMaterialTypeNameList()
         val storageItemList1 = pager1_db.getStorageNameList()
         val storageItemList2 = pager2_db.getStorageNameList()
         typeItemList.add("添加新类型")
@@ -148,7 +148,7 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
     fun initSubmitButton() {
         val pagerSubmit1 = pagerViewList[0].findViewById<View>(R.id.purchasePagerItemMaterialSubmitBtn) as Button
         pagerSubmit1.setOnClickListener {
-            bindDynamicComponent1()
+            loadDynamicComponent1()
             val dialog = ProgressDialog(this)
             dialog.setMessage("保存中……")
             dialog.isIndeterminate = true
@@ -165,7 +165,7 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
 
         val pagerSubmit2 = pagerViewList[1].findViewById<View>(R.id.purchasePagerItemPartsSubmitBtn) as Button
         pagerSubmit2.setOnClickListener {
-            bindDynamicComponent2()
+            loadDynamicComponent2()
             val dialog = ProgressDialog(this)
             dialog.setMessage("保存中……")
             dialog.isIndeterminate = true
@@ -181,7 +181,7 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
         }
     }
 
-    private fun bindDynamicComponent1() {
+    private fun loadDynamicComponent1() {
         val typeSpinner = pagerViewList[0].findViewById<View>(R.id.purchasePagerItemMaterialTypeSpinner) as Spinner
         val map = mutableMapOf<String, View>()
         if (typeSpinner.selectedItemPosition + 1 == typeSpinner.count) {
@@ -199,7 +199,7 @@ class PurchaseForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPage
         pager1_db.bind(map)
     }
 
-    private fun bindDynamicComponent2() {
+    private fun loadDynamicComponent2() {
         val storageSpinner = pagerViewList[1].findViewById<View>(R.id.purchasePagerItemPartsLocationSpinner) as Spinner
         val map = mutableMapOf<String, View>()
         if (storageSpinner.selectedItemPosition + 1 == storageSpinner.count) {

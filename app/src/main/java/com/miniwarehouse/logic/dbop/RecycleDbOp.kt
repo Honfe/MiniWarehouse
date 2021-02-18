@@ -2,13 +2,12 @@ package com.miniwarehouse.logic.dbop
 
 import android.widget.EditText
 import android.widget.Spinner
+import com.miniwarehouse.logic.model.Material
+import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.Storage
-import com.miniwarehouse.logic.model.Thing
-import com.miniwarehouse.logic.model.Type
 import com.miniwarehouse.logic.repository.MaterialRepository
 import com.miniwarehouse.logic.repository.ProductRepository
 import com.miniwarehouse.logic.repository.StorageRepository
-import com.miniwarehouse.logic.repository.TypeRepository
 import org.litepal.LitePal
 import org.litepal.extension.runInTransaction
 
@@ -17,13 +16,11 @@ class RecycleDbOp : DbOpBase() {
     private val productRepository = ProductRepository()
     private val storageRepository = StorageRepository()
     private val materialRepository = MaterialRepository()
-    private val typeRepository = TypeRepository(1)
 
     override fun prepareData() {
         productRepository.prepareData()
         storageRepository.prepareData()
         materialRepository.prepareData()
-        typeRepository.prepareData()
     }
 
     override fun submitData(): Boolean {
@@ -53,19 +50,12 @@ class RecycleDbOp : DbOpBase() {
 
         product.number -= productNumber.text.toString().toDouble()
 
-        var type = typeRepository.findDataByName("再生料")
-        if (type == null) {
-            type = Type(name = "再生料", belongTo = 1)
-        }
-
         var material = materialRepository.findDataByName(materialName.text.toString())
         if (material == null) {
-            material = Thing(
+            material = Material(
                     name = materialName.text.toString(),
-                    type = type,
+                    type = "二料",
                     number = materialNumber.text.toString().toDouble(),
-                    isMaterial = true,
-                    unit = "kg",
                     storage = storageItem,
                     detail = materialDetail.text.toString()
             )
@@ -73,10 +63,9 @@ class RecycleDbOp : DbOpBase() {
 
         var result = true
         LitePal.runInTransaction {
-            val res3 = type.save()
             val res1 = material.save()
             val res2 = product.save()
-            result = res1 && res2 && res3
+            result = res1 && res2
             result
         }
         return result

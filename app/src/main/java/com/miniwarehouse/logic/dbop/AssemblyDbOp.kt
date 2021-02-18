@@ -1,10 +1,10 @@
 package com.miniwarehouse.logic.dbop
 
+import android.util.Log
 import android.widget.EditText
 import android.widget.Spinner
+import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.Storage
-import com.miniwarehouse.logic.model.Thing
-import com.miniwarehouse.logic.model.Type
 import com.miniwarehouse.logic.repository.AssemblyRepository
 import com.miniwarehouse.logic.repository.StorageRepository
 import org.litepal.LitePal
@@ -15,20 +15,12 @@ class AssemblyDbOp : DbOpBase() {
 
     private val assemblyRepository = AssemblyRepository()
     private val storageRepository = StorageRepository()
-    private lateinit var type : Type
 
     private var assemblyCount = 1
 
     override fun prepareData() {
         assemblyRepository.prepareData()
         storageRepository.prepareData()
-        val findRes = LitePal.where("name = ? and belongTo = ?", "配件", "2").find<Type>()
-        if (findRes.isEmpty()) {
-            type = Type(name = "配件", belongTo = 2)
-        }
-        else {
-            type = findRes[0]
-        }
     }
 
     fun setDynamicComponent(count : Int) {
@@ -63,7 +55,7 @@ class AssemblyDbOp : DbOpBase() {
 
         if (!test(arrayAssemblyName, arrayAssemblyNumber)) return false
 
-        val waitToUpdateThing = ArrayList<Thing>()
+        val waitToUpdateThing = ArrayList<Product>()
         var i = 0
         while (i < arrayAssemblyName.size) {
             val item = assemblyRepository.findDataByName(arrayAssemblyName[i])
@@ -72,14 +64,13 @@ class AssemblyDbOp : DbOpBase() {
             ++i
         }
 
-        val thing = Thing(
-                name = name.text.toString(),
-                type = type,
-                number = number.text.toString().toDouble(),
-                isMaterial = false,
-                unit = "个",
-                storage = storageItem,
-                detail = detail.text.toString()
+        val product = Product(
+            name = name.text.toString(),
+            type = 2,
+            number = number.text.toString().toDouble(),
+            unit = "个",
+            storage = storageItem,
+            detail = detail.text.toString()
         )
 
         var result = true
@@ -87,7 +78,7 @@ class AssemblyDbOp : DbOpBase() {
             for (item in waitToUpdateThing) {
                 result = item.save() && result
             }
-            val res = thing.save()
+            val res = product.save()
             result = result && res
             result
         }

@@ -1,28 +1,18 @@
 package com.miniwarehouse.logic.repository
 
-import com.miniwarehouse.logic.model.Storage
-import com.miniwarehouse.logic.model.Thing
-import com.miniwarehouse.logic.model.Type
+import com.miniwarehouse.logic.model.Product
 import org.litepal.LitePal
 import org.litepal.extension.find
 
 class AssemblyRepository : RepositoryInterface {
 
-    private lateinit var assemblyList : List<Thing>
+    private lateinit var assemblyList : List<Product>
 
     override fun prepareData() {
-        lateinit var type: Type
-        val findRes = LitePal.where("name = ? and belongTo = ?", "配件", "2").find<Type>()
-        if (findRes.isEmpty()) {
-            type = Type(name = "配件", belongTo = 2)
-        }
-        else {
-            type = findRes[0]
-        }
-        assemblyList = LitePal.where("ismaterial=? and type_id=?", "0", "${type.id}").find<Thing>()
+        assemblyList = LitePal.where("type = ?", "1").find<Product>()
     }
 
-    override fun getDataList(): List<Thing> = assemblyList
+    override fun getDataList(): List<Product> = assemblyList
 
     override fun getDataNameList(): ArrayList<String> {
         val list = arrayListOf<String>()
@@ -32,7 +22,7 @@ class AssemblyRepository : RepositoryInterface {
         return list
     }
 
-    override fun findDataByName(name: String): Thing? {
+    override fun findDataByName(name: String): Product? {
         for (item in assemblyList) {
             if (item.name == name) return item
         }

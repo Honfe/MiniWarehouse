@@ -15,6 +15,7 @@ class PackedForm : AppCompatActivity() {
 
     private lateinit var selfLayout : View
     private lateinit var addItemComponent : ArrayList<View>
+    private var addItemCount = 0
 
     private val dbOp = PackageDbOp()
 
@@ -37,18 +38,18 @@ class PackedForm : AppCompatActivity() {
     private fun initButton() {
         val addItemButton = selfLayout.findViewById<View>(R.id.packedAddProductBtn) as Button
         val addItemBtnListener = AddItemClickListener(this, selfLayout.findViewById<View>(R.id.dynamicLayoutParts))
-                .addSpinnerLine("产品名称", arrayListOf())
+                .addSpinnerLine("产品名称", dbOp.getProductNameList())
                 .addEditLine("产品数量")
                 .finish()
         addItemButton.setOnClickListener(addItemBtnListener)
         addItemComponent = addItemBtnListener.getComponent()
+        addItemCount = addItemBtnListener.getComponentItemCount()
     }
 
     private fun initSpinner() {
         // database select result
-        // todo here
-        val productList = ArrayList<String>()
-        val storageList = ArrayList<String>()
+        val productList = dbOp.getProductNameList()
+        val storageList = dbOp.getStorageNameList()
         storageList.add("添加新仓库")
         // 设置Spinner
         if (productList.size > 0) {
@@ -86,13 +87,13 @@ class PackedForm : AppCompatActivity() {
         }
         dbOp.bind(storageMap)
 
-        dbOp.setDynamicComponent(addItemComponent.size)
+        dbOp.setDynamicComponent(addItemComponent.size / addItemCount)
         val productMap = mutableMapOf<String, View>(
                 "new_product_name_0" to selfLayout.findViewById(R.id.packedProductNameSpinner) as Spinner,
                 "new_product_number_0" to selfLayout.findViewById(R.id.packedProductNumberEdit) as EditText
         )
         var i = 0
-        while (i++ < addItemComponent.size / 2) {
+        while (i++ < addItemComponent.size / addItemCount) {
             productMap["new_product_name_$i"] = addItemComponent[(i - 1) * 2]
             productMap["new_product_number_$i"] = addItemComponent[(i - 1) * 2 + 1]
         }

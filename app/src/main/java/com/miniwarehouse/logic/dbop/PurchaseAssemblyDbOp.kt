@@ -2,9 +2,8 @@ package com.miniwarehouse.logic.dbop
 
 import android.widget.EditText
 import android.widget.Spinner
+import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.Storage
-import com.miniwarehouse.logic.model.Thing
-import com.miniwarehouse.logic.model.Type
 import com.miniwarehouse.logic.repository.StorageRepository
 import org.litepal.LitePal
 import org.litepal.extension.runInTransaction
@@ -32,24 +31,20 @@ class PurchaseAssemblyDbOp : DbOpBase() {
             storageItem = Storage(name = storageNameEditText.text.toString(), detail = storageDetailEditText.text.toString())
         }
 
-        val type = Type(name = "配件", belongTo = 2)
-
-        val thing = Thing(
-                name = name.text.toString(),
-                type = type,
-                number = number.text.toString().toDouble(),
-                isMaterial = false,
-                unit = unit.text.toString(),
-                storage = storageItem,
-                detail = details.text.toString()
+        val assembly = Product(
+            name = name.text.toString(),
+            type = 1,
+            number = number.text.toString().toDouble(),
+            unit = unit.text.toString(),
+            storage = storageItem,
+            detail = details.text.toString()
         )
 
         var result = false
         LitePal.runInTransaction {
             val res1 = storageItem.save()
-            val res2 = thing.save()
-            val res3 = type.save()
-            result = res1 && res2 && res3
+            val res2 = assembly.save()
+            result = res1 && res2
             result
         }
         return result

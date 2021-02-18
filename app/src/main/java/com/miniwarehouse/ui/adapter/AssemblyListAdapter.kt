@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.miniwarehose.R
-import com.miniwarehouse.logic.model.Thing
+import com.miniwarehouse.logic.model.Product
 
-class AssemblyListAdapter(val assemblyList : ArrayList<Thing>)
+class AssemblyListAdapter(val assemblyList : ArrayList<Product>)
     :RecyclerView.Adapter<AssemblyListAdapter.ViewHolder>() {
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {

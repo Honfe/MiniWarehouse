@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.miniwarehose.R
@@ -15,6 +16,7 @@ class AssemblyForm : AppCompatActivity() {
 
     private lateinit var selfLayout : View
     private lateinit var addItemComponent : ArrayList<View>
+    private var addItemCount = 0
 
     private val dbOp = AssemblyDbOp()
 
@@ -37,11 +39,12 @@ class AssemblyForm : AppCompatActivity() {
     private fun initButton() {
         val addItemButton = selfLayout.findViewById<View>(R.id.assemblyAddItemBtn) as Button
         val addItemBtnListener = AddItemClickListener(this, selfLayout.findViewById<View>(R.id.dynamicAssemblyAddItem))
-                .addSpinnerLine("配件名称", arrayListOf())
+                .addSpinnerLine("配件名称", dbOp.getAssemblyNameList())
                 .addEditLine("配件数量")
                 .finish()
         addItemButton.setOnClickListener(addItemBtnListener)
         addItemComponent = addItemBtnListener.getComponent()
+        addItemCount = addItemBtnListener.getComponentItemCount()
     }
 
     private fun initSpinner() {
@@ -85,13 +88,13 @@ class AssemblyForm : AppCompatActivity() {
         }
         dbOp.bind(storageMap)
 
-        dbOp.setDynamicComponent(addItemComponent.size)
+        dbOp.setDynamicComponent(addItemComponent.size / addItemCount)
         val assemblyMap = mutableMapOf<String,View>(
                 "new_assembly_name_0" to selfLayout.findViewById(R.id.assemblyItemNameSpinner) as Spinner,
                 "new_assembly_number_0" to selfLayout.findViewById(R.id.assemblyItemNumberEdit) as EditText
         )
         var i = 0
-        while (i++ < addItemComponent.size / 2) {
+        while (i++ < addItemComponent.size / addItemCount) {
             assemblyMap["new_assembly_name_$i"] = addItemComponent[(i - 1) * 2]
             assemblyMap["new_assembly_number_$i"] = addItemComponent[(i - 1) * 2 + 1]
         }

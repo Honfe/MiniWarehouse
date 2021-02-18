@@ -1,27 +1,18 @@
 package com.miniwarehouse.logic.repository
 
-import com.miniwarehouse.logic.model.Thing
-import com.miniwarehouse.logic.model.Type
+import com.miniwarehouse.logic.model.Product
 import org.litepal.LitePal
 import org.litepal.extension.find
 
 class GoodsRepository : RepositoryInterface {
 
-    private lateinit var goodsList : List<Thing>
+    private lateinit var goodsList : List<Product>
 
     override fun prepareData() {
-        lateinit var type: Type
-        val findRes = LitePal.where("name = ? and belongTo = ?", "货物", "2").find<Type>()
-        if (findRes.isEmpty()) {
-            type = Type(name = "货物", belongTo = 2)
-        }
-        else {
-            type = findRes[0]
-        }
-        goodsList = LitePal.where("ismaterial=? and type_id=?", "0", "${type.id}").find<Thing>()
+        goodsList = LitePal.where("type = ?", "3").find<Product>()
     }
 
-    override fun getDataList(): List<Thing> = goodsList
+    override fun getDataList(): List<Product> = goodsList
 
     override fun getDataNameList(): ArrayList<String> {
         val list = arrayListOf<String>()
@@ -31,7 +22,7 @@ class GoodsRepository : RepositoryInterface {
         return list
     }
 
-    override fun findDataByName(name: String): Thing? {
+    override fun findDataByName(name: String): Product? {
         for (item in goodsList) {
             if (item.name == name) return item
         }

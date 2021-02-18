@@ -2,30 +2,21 @@ package com.miniwarehouse.logic.dbop
 
 import android.widget.EditText
 import android.widget.Spinner
+import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.ShipmentInfo
 import com.miniwarehouse.logic.model.Storage
-import com.miniwarehouse.logic.model.Thing
-import com.miniwarehouse.logic.model.Type
 import com.miniwarehouse.logic.repository.StorageRepository
 import org.litepal.LitePal
-import org.litepal.extension.find
 import org.litepal.extension.runInTransaction
+import java.sql.Date
 
 
 class ReturnDbOp : DbOpBase() {
 
     private val storageRepository = StorageRepository()
-    private lateinit var type : Type
 
     override fun prepareData() {
         storageRepository.prepareData()
-        val findRes = LitePal.where("name = ? and belongTo = ?", "配件", "2").find<Type>()
-        if (findRes.isEmpty()) {
-            type = Type(name = "配件", belongTo = 2)
-        }
-        else {
-            type = findRes[0]
-        }
     }
 
     override fun submitData(): Boolean {
@@ -45,11 +36,10 @@ class ReturnDbOp : DbOpBase() {
             storageItem = Storage(name = storageNameEditText.text.toString(), detail = storageDetailEditText.text.toString())
         }
 
-        val thing = Thing(
+        val product = Product(
             name = name.text.toString(),
-            type = type,
+            type = 3,
             number = number.text.toString().toDouble(),
-            isMaterial = false,
             unit = "件",
             storage = storageItem,
             detail = detail.text.toString()
@@ -57,12 +47,13 @@ class ReturnDbOp : DbOpBase() {
 
         val shipment = ShipmentInfo(
             receiver = from.text.toString(),
+            date = Date.valueOf(date.text.toString()),
             detail = "退货" + returnDetail.text.toString()
         )
 
         var result = true
         LitePal.runInTransaction {
-            val res1 = thing.save()
+            val res1 = product.save()
             val res2 = shipment.save()
             result = res1 && res2
             result

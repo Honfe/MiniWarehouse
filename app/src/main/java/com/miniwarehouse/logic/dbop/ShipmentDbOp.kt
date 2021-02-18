@@ -2,12 +2,14 @@ package com.miniwarehouse.logic.dbop
 
 import android.widget.EditText
 import android.widget.Spinner
+import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.ShipmentInfo
-import com.miniwarehouse.logic.model.Thing
 import com.miniwarehouse.logic.repository.GoodsRepository
 import org.litepal.LitePal
 import org.litepal.extension.runInTransaction
 import java.lang.StringBuilder
+import java.sql.Date
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -50,7 +52,7 @@ class ShipmentDbOp : DbOpBase() {
 
         if (!test(arrayGoodsName, arrayGoodsNumber)) return false
 
-        val waitToUpdateThing = ArrayList<Thing>()
+        val waitToUpdateThing = ArrayList<Product>()
         var i = 0
         while (i < arrayGoodsName.size) {
             val item = goodsRepository.findDataByName(arrayGoodsName[i])
@@ -61,7 +63,7 @@ class ShipmentDbOp : DbOpBase() {
 
         val shipment = ShipmentInfo(
                 receiver = receiver.text.toString(),
-                date = Date(date.text.toString()) as java.sql.Date,
+                date = Date.valueOf(date.text.toString()),
                 detail = shipmentDetail
         )
 

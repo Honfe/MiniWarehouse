@@ -2,12 +2,10 @@ package com.miniwarehouse.logic.dbop
 
 import android.widget.EditText
 import android.widget.Spinner
+import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.Storage
-import com.miniwarehouse.logic.model.Thing
-import com.miniwarehouse.logic.model.Type
 import com.miniwarehouse.logic.repository.ProductRepository
 import com.miniwarehouse.logic.repository.StorageRepository
-import com.miniwarehouse.logic.repository.TypeRepository
 import org.litepal.LitePal
 import org.litepal.extension.runInTransaction
 
@@ -15,14 +13,12 @@ class PackageDbOp : DbOpBase() {
 
     private val productRepository = ProductRepository()
     private val storageRepository = StorageRepository()
-    private val typeRepository = TypeRepository()
 
     private var productCount = 1
 
     override fun prepareData() {
         productRepository.prepareData()
         storageRepository.prepareData()
-        typeRepository.prepareData()
     }
 
     fun setDynamicComponent(count : Int) {
@@ -57,7 +53,7 @@ class PackageDbOp : DbOpBase() {
 
         if (!test(arrayProductName, arrayProductNumber)) return false
 
-        val waitToUpdateThing = ArrayList<Thing>()
+        val waitToUpdateThing = ArrayList<Product>()
         var i = 0
         while (i < arrayProductName.size) {
             val item = productRepository.findDataByName(arrayProductName[i])
@@ -66,16 +62,10 @@ class PackageDbOp : DbOpBase() {
             ++i
         }
 
-        var type = typeRepository.findDataByName("货物")
-        if (type == null) {
-            type = Type(name = "货物", belongTo = 2)
-        }
-
-        val thing = Thing(
+        val shipment = Product(
                 name = name.text.toString(),
-                type = type,
+                type = 3,
                 number = number.text.toString().toDouble(),
-                isMaterial = false,
                 unit = "件",
                 storage = storageItem,
                 detail = detail.text.toString()
@@ -86,7 +76,7 @@ class PackageDbOp : DbOpBase() {
             for (item in waitToUpdateThing) {
                 result = item.save() && result
             }
-            val res = thing.save()
+            val res = shipment.save()
             result = result && res
             result
         }

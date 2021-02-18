@@ -1,18 +1,18 @@
 package com.miniwarehouse.logic.repository
 
-import com.miniwarehouse.logic.model.Thing
+import com.miniwarehouse.logic.model.Material
 import org.litepal.LitePal
-import org.litepal.extension.find
+import org.litepal.extension.findAll
 
 class MaterialRepository : RepositoryInterface {
 
-    private lateinit var materialList : List<Thing>
+    private lateinit var materialList : List<Material>
 
     override fun prepareData() {
-        materialList = LitePal.where("ismaterial=?", "1").find<Thing>()
+        materialList = LitePal.findAll<Material>()
     }
 
-    override fun getDataList(): List<Thing> = materialList
+    override fun getDataList(): List<Material> = materialList
 
     override fun getDataNameList(): ArrayList<String> {
         val list = arrayListOf<String>()
@@ -22,7 +22,7 @@ class MaterialRepository : RepositoryInterface {
         return list
     }
 
-    override fun findDataByName(name: String): Thing? {
+    override fun findDataByName(name: String): Material? {
         for (item in materialList) {
             if (item.name == name) return item
         }

@@ -28,6 +28,8 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
     private lateinit var item_two : TextView
     private lateinit var addItem1Component : ArrayList<View>
     private lateinit var addItem2Component : ArrayList<View>
+    private var addItemCount1 : Int = 0
+    private var addItemCount2 : Int = 0
 
     private val pager1_db = ProduceAssemblyDbOp()
     private val pager2_db = ProduceProductDbOp()
@@ -104,6 +106,7 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
                 .finish()
         ASMAddItemButton.setOnClickListener(ASMAddButtonListener)
         addItem1Component = ASMAddButtonListener.getComponent()
+        addItemCount1 = ASMAddButtonListener.getComponentItemCount()
         // 产品页面添加项目
         val PDTAddItemButton = pagerViewList[1].findViewById<View>(R.id.producePDTAddMaterialConsumeItem) as Button
         val PDTAddButtonListener = AddItemClickListener(this, pagerViewList[1].findViewById<View>(R.id.dynamicLayoutProducePDTAddItem))
@@ -112,6 +115,7 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
                 .finish()
         PDTAddItemButton.setOnClickListener(PDTAddButtonListener)
         addItem2Component = PDTAddButtonListener.getComponent()
+        addItemCount2 = PDTAddButtonListener.getComponentItemCount()
     }
 
     private fun initPager() {
@@ -216,13 +220,13 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
         }
         pager1_db.bind(storageMap)
 
-        pager1_db.setDynamicComponent(addItem1Component.size)
+        pager1_db.setDynamicComponent(addItem1Component.size / addItemCount1)
         val materialMap = mutableMapOf<String, View>(
                 "new_material_name_0" to pagerViewList[0].findViewById(R.id.produceASMPagerMaterialConsumeNameSpinner),
                 "new_material_weight_0" to pagerViewList[0].findViewById(R.id.produceASMMaterialConsumeNumberEdit)
         )
         var i = 0
-        while (i++ < addItem1Component.size / 2) {
+        while (i++ < addItem1Component.size / addItemCount1) {
             materialMap["new_material_name_$i"] = addItem1Component[(i - 1) * 2]
             materialMap["new_material_weight_$i"] = addItem1Component[(i - 1) * 2 + 1]
         }
@@ -240,13 +244,13 @@ class ProduceForm : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageC
         }
         pager2_db.bind(storageMap)
 
-        pager2_db.setDynamicComponent(addItem2Component.size)
+        pager2_db.setDynamicComponent(addItem2Component.size / addItemCount2)
         val materialMap = mutableMapOf<String, View>(
                 "new_material_name_0" to pagerViewList[1].findViewById(R.id.producePDTPagerMaterialConsumeNameSpinner),
                 "new_material_weight_0" to pagerViewList[1].findViewById(R.id.producePDTMaterialConsumeNumberEdit)
         )
         var i = 0
-        while (i++ < addItem2Component.size / 2) {
+        while (i++ < addItem2Component.size / addItemCount2) {
             materialMap["new_material_name_$i"] = addItem2Component[i * 2]
             materialMap["new_material_weight_$i"] = addItem2Component[i * 2 + 1]
         }
