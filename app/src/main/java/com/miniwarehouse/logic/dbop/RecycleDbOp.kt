@@ -69,8 +69,8 @@ class RecycleDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res1 = materialRepository.updateItemRepository(material)
-            val res2 = productRepository.updateItemRepository(product)
+            val res1 = materialRepository.updateItemRepository(material, storageItem)
+            val res2 = productRepository.updateItemRepository(product, storageItem)
             result = res1 && res2 && res3
             result
         }

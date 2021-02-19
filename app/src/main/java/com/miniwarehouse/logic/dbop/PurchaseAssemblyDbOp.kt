@@ -50,7 +50,7 @@ class PurchaseAssemblyDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = assemblyRepository.updateItemRepository(assembly)
+            val res2 = assemblyRepository.updateItemRepository(assembly, storageItem)
             result = res1 && res2
             result
         }

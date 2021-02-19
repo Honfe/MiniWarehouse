@@ -61,7 +61,7 @@ class ReturnDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res1 = productRepository.updateItemRepository(product)
+            val res1 = productRepository.updateItemRepository(product, storageItem)
             val res2 = shipment.save()
             result = res1 && res2 && res3
             result

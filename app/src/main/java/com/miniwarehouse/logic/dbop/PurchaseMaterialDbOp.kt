@@ -59,7 +59,7 @@ class PurchaseMaterialDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = materialRepository.updateItemRepository(material)
+            val res2 = materialRepository.updateItemRepository(material, storageItem)
             result = res1 && res2
             result
         }

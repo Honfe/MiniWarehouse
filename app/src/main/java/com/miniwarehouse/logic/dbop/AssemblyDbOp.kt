@@ -84,7 +84,7 @@ class AssemblyDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = productRepository.updateItemRepository(product)
+            val res2 = productRepository.updateItemRepository(product, storageItem)
             result = result && res1 && res2
             result
         }

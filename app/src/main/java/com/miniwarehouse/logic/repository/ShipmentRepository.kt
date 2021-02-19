@@ -1,7 +1,10 @@
 package com.miniwarehouse.logic.repository
 
+import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.ShipmentInfo
+import com.miniwarehouse.logic.model.Storage
 import org.litepal.LitePal
+import org.litepal.extension.find
 import org.litepal.extension.findAll
 
 class ShipmentRepository : RepositoryInterface {
@@ -28,4 +31,16 @@ class ShipmentRepository : RepositoryInterface {
         }
         return null
     }
+
+    fun updateItemRepository(target : Product, storage : Storage): Boolean {
+        val list = LitePal.where("name = ? and type = ? and storage_id = ?", target.name, target.type.toString(), storage.id.toString()).find<Product>()
+        return if (list.isEmpty()) {
+            target.save()
+        }
+        else {
+            list[0].number += target.number
+            list[0].save()
+        }
+    }
+
 }

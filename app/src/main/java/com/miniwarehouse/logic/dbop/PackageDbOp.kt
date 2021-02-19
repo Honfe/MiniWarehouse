@@ -4,7 +4,9 @@ import android.widget.EditText
 import android.widget.Spinner
 import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.Storage
+import com.miniwarehouse.logic.repository.GoodsRepository
 import com.miniwarehouse.logic.repository.ProductRepository
+import com.miniwarehouse.logic.repository.ShipmentRepository
 import com.miniwarehouse.logic.repository.StorageRepository
 import org.litepal.LitePal
 import org.litepal.extension.runInTransaction
@@ -13,6 +15,7 @@ class PackageDbOp : DbOpBase() {
 
     private val productRepository = ProductRepository()
     private val storageRepository = StorageRepository()
+    private val goodsRepository = GoodsRepository()
 
     private var productCount = 1
 
@@ -64,7 +67,7 @@ class PackageDbOp : DbOpBase() {
             ++i
         }
 
-        val shipment = Product(
+        val goods = Product(
                 name = name.text.toString(),
                 type = 3,
                 number = number.text.toString().toDouble(),
@@ -82,7 +85,7 @@ class PackageDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = shipment.save()
+            val res2 = goodsRepository.updateItemRepository(goods, storageItem)
             result = result && res1 && res2
             result
         }

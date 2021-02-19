@@ -94,7 +94,7 @@ class ProduceAssemblyDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res1 = assemblyRepository.updateItemRepository(assembly)
+            val res1 = assemblyRepository.updateItemRepository(assembly, storageItem)
             result = result && res1 && res2
             result
         }

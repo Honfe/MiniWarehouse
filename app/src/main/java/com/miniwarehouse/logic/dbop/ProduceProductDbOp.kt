@@ -94,7 +94,7 @@ class ProduceProductDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = productRepository.updateItemRepository(product)
+            val res2 = productRepository.updateItemRepository(product, storageItem)
             result = result && res2 && res1
             result
         }
