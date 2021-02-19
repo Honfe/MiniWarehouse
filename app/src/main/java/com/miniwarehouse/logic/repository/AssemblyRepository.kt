@@ -51,4 +51,16 @@ class AssemblyRepository(private var crossTable : Boolean = false) : RepositoryI
         }
         return null
     }
+
+    fun updateItemRepository(target : Product): Boolean {
+        val list = LitePal.where("name = ? and type = ?", target.name, target.type.toString()).find<Product>()
+        return if (list.isEmpty()) {
+            target.save()
+        }
+        else {
+            list[0].number += target.number
+            list[0].save()
+        }
+    }
+
 }

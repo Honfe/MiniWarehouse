@@ -5,6 +5,7 @@ import android.widget.Spinner
 import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.ShipmentInfo
 import com.miniwarehouse.logic.model.Storage
+import com.miniwarehouse.logic.repository.ProductRepository
 import com.miniwarehouse.logic.repository.StorageRepository
 import org.litepal.LitePal
 import org.litepal.extension.runInTransaction
@@ -14,6 +15,7 @@ import java.sql.Date
 class ReturnDbOp : DbOpBase() {
 
     private val storageRepository = StorageRepository()
+    private val productRepository = ProductRepository()
 
     override fun prepareData() {
         storageRepository.prepareData()
@@ -59,7 +61,7 @@ class ReturnDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res1 = product.save()
+            val res1 = productRepository.updateItemRepository(product)
             val res2 = shipment.save()
             result = res1 && res2 && res3
             result

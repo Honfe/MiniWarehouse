@@ -4,6 +4,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import com.miniwarehouse.logic.model.Material
 import com.miniwarehouse.logic.model.Storage
+import com.miniwarehouse.logic.repository.MaterialRepository
 import com.miniwarehouse.logic.repository.MaterialTypeRepository
 import com.miniwarehouse.logic.repository.StorageRepository
 import org.litepal.LitePal
@@ -13,6 +14,7 @@ class PurchaseMaterialDbOp : DbOpBase() {
 
     private val storageRepository = StorageRepository()
     private val typeRepository = MaterialTypeRepository()
+    private val materialRepository = MaterialRepository()
 
     override fun prepareData() {
         storageRepository.prepareData()
@@ -57,7 +59,7 @@ class PurchaseMaterialDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = material.save()
+            val res2 = materialRepository.updateItemRepository(material)
             result = res1 && res2
             result
         }

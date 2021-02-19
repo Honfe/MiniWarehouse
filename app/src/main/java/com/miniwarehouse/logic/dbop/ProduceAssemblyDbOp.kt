@@ -5,6 +5,7 @@ import android.widget.Spinner
 import com.miniwarehouse.logic.model.Material
 import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.Storage
+import com.miniwarehouse.logic.repository.AssemblyRepository
 import com.miniwarehouse.logic.repository.MaterialRepository
 import com.miniwarehouse.logic.repository.StorageRepository
 import org.litepal.LitePal
@@ -15,6 +16,7 @@ class ProduceAssemblyDbOp : DbOpBase() {
 
     private val materialRepository = MaterialRepository()
     private val storageRepository = StorageRepository()
+    private val assemblyRepository = AssemblyRepository()
 
     private var materialCount = 1
 
@@ -92,7 +94,7 @@ class ProduceAssemblyDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res1 = assembly.save()
+            val res1 = assemblyRepository.updateItemRepository(assembly)
             result = result && res1 && res2
             result
         }

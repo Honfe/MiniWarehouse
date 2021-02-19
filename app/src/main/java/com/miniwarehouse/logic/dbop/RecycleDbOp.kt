@@ -50,7 +50,7 @@ class RecycleDbOp : DbOpBase() {
         }
         else return false
 
-        product.number -= productNumber.text.toString().toDouble()
+        product.number = -productNumber.text.toString().toDouble()
 
         var material = materialRepository.findDataByName(materialName.text.toString())
         if (material == null) {
@@ -69,8 +69,8 @@ class RecycleDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res1 = material.save()
-            val res2 = product.save()
+            val res1 = materialRepository.updateItemRepository(material)
+            val res2 = productRepository.updateItemRepository(product)
             result = res1 && res2 && res3
             result
         }

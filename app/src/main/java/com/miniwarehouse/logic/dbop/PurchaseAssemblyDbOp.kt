@@ -4,6 +4,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.Storage
+import com.miniwarehouse.logic.repository.AssemblyRepository
 import com.miniwarehouse.logic.repository.StorageRepository
 import org.litepal.LitePal
 import org.litepal.extension.runInTransaction
@@ -11,6 +12,7 @@ import org.litepal.extension.runInTransaction
 class PurchaseAssemblyDbOp : DbOpBase() {
 
     private val storageRepository = StorageRepository()
+    private val assemblyRepository = AssemblyRepository()
 
     override fun prepareData() {
         storageRepository.prepareData()
@@ -48,7 +50,7 @@ class PurchaseAssemblyDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = assembly.save()
+            val res2 = assemblyRepository.updateItemRepository(assembly)
             result = res1 && res2
             result
         }

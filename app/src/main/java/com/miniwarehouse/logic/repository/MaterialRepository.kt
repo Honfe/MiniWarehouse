@@ -2,7 +2,9 @@ package com.miniwarehouse.logic.repository
 
 import android.util.Log
 import com.miniwarehouse.logic.model.Material
+import com.miniwarehouse.logic.model.Product
 import org.litepal.LitePal
+import org.litepal.extension.find
 import org.litepal.extension.findAll
 
 class MaterialRepository(private var crossTable : Boolean = false) : RepositoryInterface {
@@ -48,6 +50,17 @@ class MaterialRepository(private var crossTable : Boolean = false) : RepositoryI
             if (item.name == name) return item
         }
         return null
+    }
+
+    fun updateItemRepository(target : Material): Boolean {
+        val list = LitePal.where("name = ? and type = ?", target.name, target.type).find<Material>()
+        return if (list.isEmpty()) {
+            target.save()
+        }
+        else {
+            list[0].number += target.number
+            list[0].save()
+        }
     }
 
 }
