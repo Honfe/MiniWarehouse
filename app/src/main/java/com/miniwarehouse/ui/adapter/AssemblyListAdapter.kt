@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.miniwarehose.R
-import com.miniwarehouse.logic.model.Thing
+import com.miniwarehouse.logic.model.Product
 
-class AssemblyListAdapter(val assemblyList : ArrayList<Thing>)
+class AssemblyListAdapter(val assemblyList : List<Product>)
     :RecyclerView.Adapter<AssemblyListAdapter.ViewHolder>() {
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
@@ -33,7 +33,7 @@ class AssemblyListAdapter(val assemblyList : ArrayList<Thing>)
         val assembly = assemblyList[position]
         holder.name.text = assembly.name
         holder.number.text = assembly.number.toString()
-        holder.storage.text = assembly.storage.toString()
+        holder.storage.text = assembly.storage.name
         holder.details.text = assembly.detail
 
         holder.storageTitle.text = "存储位置"

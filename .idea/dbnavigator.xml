@@ -8,6 +8,7 @@
   <component name="DBNavigator.Project.DataExportManager">
     <export-instructions>
       <create-header value="true" />
+      <friendly-headers value="false" />
       <quote-values-containing-separator value="true" />
       <quote-all-values value="false" />
       <value-separator value="" />
@@ -23,22 +24,30 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="c37913e8-66ae-4ebb-8d04-6c1de954d16c">
-        <schema name="main" object-types="table, column, constraint, dataset trigger, view, index" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="c37913e8-66ae-4ebb-8d04-6c1de954d16c">
-      <console name="Connection" type="STANDARD" schema="main" session="Main" />
+    <connection id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5">
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select
+    m.detail,
+    m.id,
+    m.name,
+    m.number,
+    m.storage_id,
+    m.type
+from
+    material m;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="c37913e8-66ae-4ebb-8d04-6c1de954d16c" />
+    <connection id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5" dataset="main.thing" active-filter-id="" />
+    <filter-actions connection-id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5" dataset="main.storage" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -66,7 +75,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="c37913e8-66ae-4ebb-8d04-6c1de954d16c" active="true">
+      <connection id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5" active="true">
         <database>
           <name value="Connection" />
           <description value="" />

@@ -6,19 +6,28 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.miniwarehose.R
-import com.miniwarehouse.logic.model.Thing
+import com.miniwarehouse.logic.model.Product
+import com.miniwarehouse.logic.repository.GoodsRepository
 import com.miniwarehouse.ui.adapter.PackedListAdapter
 import kotlinx.android.synthetic.main.activity_packed_list.*
 
 class PackedList : AppCompatActivity() {
+
+    private val repository = GoodsRepository(true)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_packed_list)
+        cacheData()
         initRecyclerView()
     }
 
+    private fun cacheData() {
+        repository.prepareData()
+    }
+
     fun initRecyclerView() {
-        val arrayList = arrayListOf<Thing>()
+        val arrayList = repository.getDataList()
         val listLayout = findViewById<View>(R.id.packedSomething) as LinearLayout
         val emptyLayout = findViewById<View>(R.id.packedNothing) as LinearLayout
         if (arrayList.size <= 0) {

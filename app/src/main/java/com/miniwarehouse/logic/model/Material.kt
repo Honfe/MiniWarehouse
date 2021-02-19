@@ -1,13 +1,12 @@
 package com.miniwarehouse.logic.model
 
 import org.litepal.crud.LitePalSupport
-import java.sql.Date
 
-class ShipmentInfo(
+class Material(
     var id : Long = 0,
     var name : String = "",
-    var date : Date = Date.valueOf("2021-1-1"),
-    var receiver : String = "",
-    var units : String = "",
+    var type : String = "",
+    var number : Double = 0.0,
+    var storage : Storage = Storage(),
     var detail : String = ""
 ) : LitePalSupport()

@@ -34,8 +34,8 @@
     <list>
         <mapping class="com.miniwarehouse.logic.model.ShipmentInfo"/>
         <mapping class="com.miniwarehouse.logic.model.Storage"/>
-        <mapping class="com.miniwarehouse.logic.model.Thing"/>
-        <mapping class="com.miniwarehouse.logic.model.Type"/>
+        <mapping class="com.miniwarehouse.logic.model.Material"/>
+        <mapping class="com.miniwarehouse.logic.model.Product"/>
     </list>
 
     <!--

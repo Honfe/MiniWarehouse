@@ -4,7 +4,8 @@ import org.litepal.crud.LitePalSupport
 
 class Storage(
     var id : Long = 0,
-    var name : String,
+    var name : String = "",
     var detail : String = "",
-    var thingList : List<Thing> = listOf()
+    var materialList : List<Material> = listOf(),
+    var productList : List<Product> = listOf()
 ) : LitePalSupport()
