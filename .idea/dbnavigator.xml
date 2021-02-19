@@ -24,15 +24,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5">
-        <schema name="main" object-types="column, constraint, index, dataset trigger, view, table" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5">
-      <console name="Connection" type="STANDARD" schema="main" session="Main">select
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select
     m.detail,
     m.id,
     m.name,
@@ -40,7 +36,7 @@
     m.storage_id,
     m.type
 from
-    material m;</console>
+    material m;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
