@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.miniwarehose.R
 import com.miniwarehouse.logic.model.ShipmentInfo
 
-class ShipmentListAdapter(val shipmentList : ArrayList<ShipmentInfo>)
+class ShipmentListAdapter(val shipmentList : List<ShipmentInfo>)
     : RecyclerView.Adapter<ShipmentListAdapter.ViewHolder>() {
 
     inner class ViewHolder(view : View) :RecyclerView.ViewHolder(view) {
-        val recevier = view.findViewById<View>(R.id.line1_item1) as TextView
+        val receiver = view.findViewById<View>(R.id.line1_item1) as TextView
         val name = view.findViewById<View>(R.id.line1_item2) as TextView
         val date = view.findViewById<View>(R.id.line2_item2) as TextView
         val details = view.findViewById<View>(R.id.line3_item2) as TextView
@@ -31,7 +31,7 @@ class ShipmentListAdapter(val shipmentList : ArrayList<ShipmentInfo>)
 
     override fun onBindViewHolder(holder: ShipmentListAdapter.ViewHolder, position: Int) {
         val shipment = shipmentList[position]
-        holder.recevier.text = shipment.receiver
+        holder.receiver.text = shipment.receiver
         holder.name.text = shipment.name
         holder.date.text = shipment.date.toString()
         holder.details.text = shipment.detail

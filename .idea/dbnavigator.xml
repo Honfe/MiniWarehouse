@@ -24,16 +24,23 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5">
+        <schema name="main" object-types="column, constraint, index, dataset trigger, view, table" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select
-    t.belongto,
-    t.id,
-    t.name
+      <console name="Connection" type="STANDARD" schema="main" session="Main">select
+    m.detail,
+    m.id,
+    m.name,
+    m.number,
+    m.storage_id,
+    m.type
 from
-    type t;]]></console>
+    material m;</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -44,6 +51,7 @@ from
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5" dataset="main.thing" active-filter-id="" />
+    <filter-actions connection-id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5" dataset="main.storage" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.miniwarehose.R
 import com.miniwarehouse.logic.model.Material
 
-class MaterialListAdapter(val materialList : ArrayList<Material>)
+class MaterialListAdapter(val materialList : List<Material>)
     : RecyclerView.Adapter<MaterialListAdapter.ViewHolder>() {
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
