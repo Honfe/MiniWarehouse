@@ -41,7 +41,7 @@ class RecyclerForm : AppCompatActivity() {
                 "material_name" to selfLayout.findViewById(R.id.recycleToMaterialName),
                 "material_number" to selfLayout.findViewById(R.id.recycleToMaterialNumberEdit),
                 "material_storage" to selfLayout.findViewById(R.id.recycleToMaterialLocationSpinner),
-                "material_detial" to selfLayout.findViewById(R.id.shipmentPackageItemDetialEdit)
+                "material_detail" to selfLayout.findViewById(R.id.shipmentPackageItemDetialEdit)
         )
         dbOp.bind(map)
     }
@@ -60,7 +60,11 @@ class RecyclerForm : AppCompatActivity() {
 
     private fun initSpinner() {
         // database select result
-        val recycleNameList = dbOp.getProductNameList()
+        val productNameList = dbOp.getProductNameList()
+        val goodsNameList = dbOp.getGoodsNameList()
+        val recycleNameList = arrayListOf<String>()
+        recycleNameList.addAll(productNameList)
+        recycleNameList.addAll(goodsNameList)
         val storageList = dbOp.getStorageNameList()
         storageList.add("添加新仓库")
         if (recycleNameList.size > 0) {

@@ -37,7 +37,7 @@ class ReturnProductForm : AppCompatActivity() {
 
     private fun registerConstantWidget() {
         val map = mutableMapOf<String, View>(
-            "name" to selfLayout.findViewById<View>(R.id.returnProductNameEdit),
+            "name" to selfLayout.findViewById(R.id.returnProductNameEdit),
             "number" to selfLayout.findViewById(R.id.returnProductNumberEdit),
             "storage" to selfLayout.findViewById(R.id.returnProductLocationSpinner),
             "detail" to selfLayout.findViewById(R.id.returnProductDetailEdit),
@@ -45,6 +45,18 @@ class ReturnProductForm : AppCompatActivity() {
             "date" to selfLayout.findViewById(R.id.returnFromDateEdit),
             "returnDetail" to selfLayout.findViewById(R.id.returnFromDetialEdit)
         )
+        dbOp.bind(map)
+    }
+
+    private fun loadDynamicComponent() {
+        val map = mutableMapOf<String, View>()
+        val storageSpinner = selfLayout.findViewById<View>(R.id.returnProductLocationSpinner) as Spinner
+        if (storageSpinner.selectedItemPosition + 1 == storageSpinner.count) {
+            val listener = storageSpinner.onItemSelectedListener as OtherItemSelectedListener
+            val component = listener.getComponent()
+            map["new_storage_name"] = component[0]
+            map["new_storage_detail"] = component[1]
+        }
         dbOp.bind(map)
     }
 
@@ -65,6 +77,7 @@ class ReturnProductForm : AppCompatActivity() {
     private fun initSubmitButton() {
         val submit = selfLayout.findViewById<View>(R.id.returnSubmitBtn) as Button
         submit.setOnClickListener {
+            loadDynamicComponent()
             val dialog = ProgressDialog(this)
             dialog.setMessage("保存中……")
             dialog.isIndeterminate = true

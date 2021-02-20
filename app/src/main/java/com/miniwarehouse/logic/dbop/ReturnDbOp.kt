@@ -50,9 +50,11 @@ class ReturnDbOp : DbOpBase() {
         )
 
         val shipment = ShipmentInfo(
+            name = name.text.toString(),
             receiver = from.text.toString(),
             date = date.text.toString(),
-            detail = "退货" + returnDetail.text.toString()
+            status = 1,
+            detail = returnDetail.text.toString() + "（退货）"
         )
 
         var result = true

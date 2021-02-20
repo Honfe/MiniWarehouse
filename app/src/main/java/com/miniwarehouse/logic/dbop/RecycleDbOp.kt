@@ -5,9 +5,7 @@ import android.widget.Spinner
 import com.miniwarehouse.logic.model.Material
 import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.Storage
-import com.miniwarehouse.logic.repository.MaterialRepository
-import com.miniwarehouse.logic.repository.ProductRepository
-import com.miniwarehouse.logic.repository.StorageRepository
+import com.miniwarehouse.logic.repository.*
 import org.litepal.LitePal
 import org.litepal.extension.runInTransaction
 
@@ -16,11 +14,13 @@ class RecycleDbOp : DbOpBase() {
     private val productRepository = ProductRepository()
     private val storageRepository = StorageRepository()
     private val materialRepository = MaterialRepository()
+    private val goodsRepository = GoodsRepository()
 
     override fun prepareData() {
         productRepository.prepareData()
         storageRepository.prepareData()
         materialRepository.prepareData()
+        goodsRepository.prepareData()
     }
 
     override fun submitData(): Boolean {
@@ -44,13 +44,19 @@ class RecycleDbOp : DbOpBase() {
         val productName = productNameSpinner.selectedItem.toString()
 
         val product = productRepository.findDataByName(productName)
+        val goods = goodsRepository.findDataByName(productName)
         if (product != null) {
             if (product.number - productNumber.text.toString().toDouble() < 0)
                 return false
         }
+        else if (goods != null) {
+            if (goods.number - productNumber.text.toString().toDouble() < 0)
+                return false
+        }
         else return false
 
-        product.number = -productNumber.text.toString().toDouble()
+        if (product != null) product.number = -productNumber.text.toString().toDouble()
+        else if (goods != null) goods.number = -productNumber.text.toString().toDouble()
 
         var material = materialRepository.findDataByName(materialName.text.toString())
         if (material == null) {
@@ -70,7 +76,9 @@ class RecycleDbOp : DbOpBase() {
             else
                 true
             val res1 = materialRepository.updateItemRepository(material, storageItem)
-            val res2 = productRepository.updateItemRepository(product, storageItem)
+            val res2 = if (product != null) productRepository.updateItemRepository(product, storageItem)
+            else if (goods != null) goodsRepository.updateItemRepository(goods, storageItem)
+            else false
             result = res1 && res2 && res3
             result
         }
@@ -80,5 +88,7 @@ class RecycleDbOp : DbOpBase() {
     fun getProductNameList() : ArrayList<String> = productRepository.getDataNameList()
 
     fun getStorageNameList() : ArrayList<String> = storageRepository.getDataNameList()
+
+    fun getGoodsNameList() : ArrayList<String> = goodsRepository.getDataNameList()
 
 }

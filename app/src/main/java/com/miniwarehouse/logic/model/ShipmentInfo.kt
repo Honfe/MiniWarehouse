@@ -8,6 +8,6 @@ class ShipmentInfo(
     var name : String = "",
     var date : String = "2021-1-1",
     var receiver : String = "",
-    var units : String = "",
+    var status : Int = 0, // 退货->1， 出货->0
     var detail : String = ""
 ) : LitePalSupport()

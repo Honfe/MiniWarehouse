@@ -65,6 +65,7 @@ class ShipmentDbOp : DbOpBase() {
         val shipment = ShipmentInfo(
                 receiver = receiver.text.toString(),
                 date = date.text.toString(),
+                status = 0,
                 detail = shipmentDetail
         )
 

@@ -1,5 +1,6 @@
 package com.miniwarehouse.ui.adapter
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,7 @@ class ShipmentListAdapter(val shipmentList : List<ShipmentInfo>)
         return ViewHolder(holder)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ShipmentListAdapter.ViewHolder, position: Int) {
         val shipment = shipmentList[position]
         holder.receiver.text = shipment.receiver
@@ -37,10 +39,9 @@ class ShipmentListAdapter(val shipmentList : List<ShipmentInfo>)
         holder.date.text = shipment.date
         holder.details.text = shipment.detail
 
-        Log.d("hhhh", shipment.date)
-
-        holder.storageTitle.text = "出货日期"
-        holder.detailsTitle.text = "出货详情"
+        val pre : String = if (shipment.status == 0) "出货" else "退货"
+        holder.storageTitle.text = pre + "日期"
+        holder.detailsTitle.text = pre + "详情"
     }
 
     override fun getItemCount(): Int = shipmentList.size
