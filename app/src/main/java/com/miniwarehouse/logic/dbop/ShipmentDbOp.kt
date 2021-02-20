@@ -1,5 +1,6 @@
 package com.miniwarehouse.logic.dbop
 
+import android.util.Log
 import android.widget.EditText
 import android.widget.Spinner
 import com.miniwarehouse.logic.model.Product
@@ -43,8 +44,8 @@ class ShipmentDbOp : DbOpBase() {
             arrayGoodsNumber.add(numberEdit.text.toString().toDouble())
             val detailEdit = registor.getViewItem("new_goods_detail_$index") as EditText
             shipmentDetailBuilder
-                    .append(arrayGoodsName.last()).append(' ')
-                    .append(arrayGoodsNumber.last()).append(' ')
+                    .append(arrayGoodsName.last()).append(' ').append("数量：")
+                    .append(arrayGoodsNumber.last()).append(' ').append("备注：")
                     .append(detailEdit.text.toString()).append('\n')
             ++index
         }
@@ -63,7 +64,7 @@ class ShipmentDbOp : DbOpBase() {
 
         val shipment = ShipmentInfo(
                 receiver = receiver.text.toString(),
-                date = Date.valueOf(date.text.toString()),
+                date = date.text.toString(),
                 detail = shipmentDetail
         )
 

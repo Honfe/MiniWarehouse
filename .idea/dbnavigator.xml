@@ -24,19 +24,22 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5">
+        <schema name="main" object-types="column, constraint, index, view, table, dataset trigger" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="e5f65ee7-eb82-48a8-aa4b-cfebc9b76fe5">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select
-    m.detail,
-    m.id,
-    m.name,
-    m.number,
-    m.storage_id,
-    m.type
+      <console name="Connection" type="STANDARD" schema="" session="Main"><![CDATA[select
+    s.detail,
+    s.id,
+    s.name,
+    s.receiver,
+    s.units
 from
-    material m;]]></console>
+    shipmentinfo s;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

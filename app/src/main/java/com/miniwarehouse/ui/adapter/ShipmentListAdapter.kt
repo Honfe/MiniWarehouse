@@ -1,5 +1,6 @@
 package com.miniwarehouse.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,10 +34,12 @@ class ShipmentListAdapter(val shipmentList : List<ShipmentInfo>)
         val shipment = shipmentList[position]
         holder.receiver.text = shipment.receiver
         holder.name.text = shipment.name
-        holder.date.text = shipment.date.toString()
+        holder.date.text = shipment.date
         holder.details.text = shipment.detail
 
-        holder.storageTitle.text = "存储位置"
+        Log.d("hhhh", shipment.date)
+
+        holder.storageTitle.text = "出货日期"
         holder.detailsTitle.text = "出货详情"
     }
 

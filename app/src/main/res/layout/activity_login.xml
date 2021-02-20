@@ -40,14 +40,14 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_marginRight="30dp"
-        android:text="@string/forgetPassword"
-        tools:ignore="RtlHardcoded"
-        android:linksClickable="true"/>
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="right"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:text="@string/forgetPassword"-->
+<!--        tools:ignore="RtlHardcoded"-->
+<!--        android:linksClickable="true"/>-->
 
 
 </LinearLayout>
