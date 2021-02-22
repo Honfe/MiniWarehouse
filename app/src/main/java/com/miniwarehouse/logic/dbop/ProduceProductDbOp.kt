@@ -21,6 +21,7 @@ class ProduceProductDbOp : DbOpBase() {
     private var materialCount = 1
 
     override fun prepareData() {
+        materialRepository.conditionNumber = 0
         materialRepository.prepareData()
         storageRepository.prepareData()
     }

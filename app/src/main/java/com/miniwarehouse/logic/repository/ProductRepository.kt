@@ -7,6 +7,8 @@ import org.litepal.extension.find
 
 class ProductRepository(private var crossTable : Boolean = false) : RepositoryInterface {
 
+    var conditionNumber = -1
+
     private lateinit var productList : List<Product>
 
     override fun prepareData() {
@@ -30,7 +32,7 @@ class ProductRepository(private var crossTable : Boolean = false) : RepositoryIn
             productList = list
         }
         else
-            productList = LitePal.where("type = ?", "2").find<Product>()
+            productList = LitePal.where("type = ? and number > ?", "2", conditionNumber.toString()).find<Product>()
     }
 
     override fun getDataList(): List<Product> = productList

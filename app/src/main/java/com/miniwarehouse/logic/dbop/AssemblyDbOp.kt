@@ -19,6 +19,7 @@ class AssemblyDbOp : DbOpBase() {
     private var assemblyCount = 1
 
     override fun prepareData() {
+        assemblyRepository.conditionNumber = 0
         assemblyRepository.prepareData()
         storageRepository.prepareData()
     }

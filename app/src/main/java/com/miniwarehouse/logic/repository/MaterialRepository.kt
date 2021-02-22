@@ -10,6 +10,8 @@ import org.litepal.extension.findAll
 
 class MaterialRepository(private var crossTable : Boolean = false) : RepositoryInterface {
 
+    var conditionNumber = -1
+
     private lateinit var materialList : List<Material>
 
     override fun prepareData() {
@@ -33,7 +35,7 @@ class MaterialRepository(private var crossTable : Boolean = false) : RepositoryI
             materialList = list
         }
         else
-            materialList = LitePal.findAll<Material>()
+            materialList = LitePal.where("number > ?", conditionNumber.toString()).find<Material>()
     }
 
     override fun getDataList(): List<Material> = materialList

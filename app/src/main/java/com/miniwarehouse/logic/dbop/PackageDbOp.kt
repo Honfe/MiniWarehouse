@@ -20,6 +20,7 @@ class PackageDbOp : DbOpBase() {
     private var productCount = 1
 
     override fun prepareData() {
+        productRepository.conditionNumber = 0
         productRepository.prepareData()
         storageRepository.prepareData()
     }

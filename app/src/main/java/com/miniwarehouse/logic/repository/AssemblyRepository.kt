@@ -9,6 +9,8 @@ import org.litepal.extension.find
 
 class AssemblyRepository(private var crossTable : Boolean = false) : RepositoryInterface {
 
+    var conditionNumber = -1
+
     private lateinit var assemblyList : List<Product>
 
     override fun prepareData() {
@@ -32,7 +34,7 @@ class AssemblyRepository(private var crossTable : Boolean = false) : RepositoryI
             assemblyList = list
         }
         else {
-            assemblyList = LitePal.where("type = ?", "1").find<Product>()
+            assemblyList = LitePal.where("type = ? and number > ?", "1", conditionNumber.toString()).find<Product>()
         }
     }
 

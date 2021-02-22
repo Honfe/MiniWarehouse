@@ -21,6 +21,7 @@ class ShipmentDbOp : DbOpBase() {
     private var goodsCount = 1
 
     override fun prepareData() {
+        goodsRepository.conditionNumber = 0
         goodsRepository.prepareData()
     }
 

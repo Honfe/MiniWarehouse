@@ -17,6 +17,8 @@ class RecycleDbOp : DbOpBase() {
     private val goodsRepository = GoodsRepository()
 
     override fun prepareData() {
+        productRepository.conditionNumber = 0
+        goodsRepository.conditionNumber = 0
         productRepository.prepareData()
         storageRepository.prepareData()
         materialRepository.prepareData()
