@@ -100,4 +100,5 @@
     <string name="inputProductName">请输入产品名称</string>
     <string name="inputRecvrName">请输入收货人</string>
     <string name="nothing">无内容</string>
+    <string name="deleteItem">删除</string>
 </resources>

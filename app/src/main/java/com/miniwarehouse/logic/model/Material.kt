@@ -24,4 +24,8 @@ class Material(
         }
     }
 
+    fun deleteItself(): Int {
+        return LitePal.delete(Material::class.java, this.id)
+    }
+
 }

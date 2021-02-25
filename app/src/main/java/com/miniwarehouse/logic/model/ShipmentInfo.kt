@@ -1,5 +1,6 @@
 package com.miniwarehouse.logic.model
 
+import org.litepal.LitePal
 import org.litepal.crud.LitePalSupport
 import java.sql.Date
 
@@ -10,4 +11,10 @@ class ShipmentInfo(
     var receiver : String = "",
     var status : Int = 0, // 退货->1， 出货->0
     var detail : String = ""
-) : LitePalSupport()
+) : LitePalSupport() {
+
+    fun deleteItself(): Int {
+        return LitePal.delete(ShipmentInfo::class.java, this.id)
+    }
+
+}

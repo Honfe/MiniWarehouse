@@ -34,4 +34,8 @@ class Product(
         }
     }
 
+    fun deleteItself(): Int {
+        return LitePal.delete(Product::class.java, this.id)
+    }
+
 }

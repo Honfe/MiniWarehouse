@@ -27,20 +27,25 @@ class PackedList : AppCompatActivity() {
     }
 
     fun initRecyclerView() {
-        val arrayList = repository.getDataList()
+        val arrayList = ArrayList<Product>(repository.getDataList())
+        val layoutManager = LinearLayoutManager(this)
+        packedListView.layoutManager = layoutManager
+        val adapter = PackedListAdapter(this, arrayList)
+        packedListView.adapter = adapter
+        updateView(arrayList.size)
+    }
+
+    fun updateView(listSize : Int) {
         val listLayout = findViewById<View>(R.id.packedSomething) as LinearLayout
         val emptyLayout = findViewById<View>(R.id.packedNothing) as LinearLayout
-        if (arrayList.size <= 0) {
+        if (listSize <= 0) {
             listLayout.visibility = LinearLayout.GONE
             emptyLayout.visibility = LinearLayout.VISIBLE
         }
         else {
-            val layoutManager = LinearLayoutManager(this)
-            packedListView.layoutManager = layoutManager
-            val adapter = PackedListAdapter(arrayList)
-            packedListView.adapter = adapter
             listLayout.visibility = LinearLayout.VISIBLE
             emptyLayout.visibility = LinearLayout.GONE
         }
     }
+
 }

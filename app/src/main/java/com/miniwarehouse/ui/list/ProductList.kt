@@ -27,18 +27,22 @@ class ProductList : AppCompatActivity() {
     }
 
     fun initRecyclerView() {
-        val arrayList = repository.getDataList()
+        val arrayList = ArrayList<Product>(repository.getDataList())
+        val layoutManager = LinearLayoutManager(this)
+        productListView.layoutManager = layoutManager
+        val adapter = ProductListAdapter(this, arrayList)
+        productListView.adapter = adapter
+        updateView(arrayList.size)
+    }
+
+    fun updateView(listSize : Int) {
         val listLayout = findViewById<View>(R.id.productSomething) as LinearLayout
         val emptyLayout = findViewById<View>(R.id.productNothing) as LinearLayout
-        if (arrayList.size <= 0) {
+        if (listSize <= 0) {
             listLayout.visibility = LinearLayout.GONE
             emptyLayout.visibility = LinearLayout.VISIBLE
         }
         else {
-            val layoutManager = LinearLayoutManager(this)
-            productListView.layoutManager = layoutManager
-            val adapter = ProductListAdapter(arrayList)
-            productListView.adapter = adapter
             listLayout.visibility = LinearLayout.VISIBLE
             emptyLayout.visibility = LinearLayout.GONE
         }
