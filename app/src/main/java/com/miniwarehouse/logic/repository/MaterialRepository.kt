@@ -55,15 +55,4 @@ class MaterialRepository(private var crossTable : Boolean = false) : RepositoryI
         return null
     }
 
-    fun updateItemRepository(target : Material, storage : Storage): Boolean {
-        val list = LitePal.where("name = ? and type = ? and storage_id = ?", target.name, target.type, storage.id.toString()).find<Material>()
-        return if (list.isEmpty()) {
-            target.save()
-        }
-        else {
-            list[0].number += target.number
-            list[0].save()
-        }
-    }
-
 }

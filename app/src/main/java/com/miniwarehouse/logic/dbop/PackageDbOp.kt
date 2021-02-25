@@ -6,7 +6,6 @@ import com.miniwarehouse.logic.model.Product
 import com.miniwarehouse.logic.model.Storage
 import com.miniwarehouse.logic.repository.GoodsRepository
 import com.miniwarehouse.logic.repository.ProductRepository
-import com.miniwarehouse.logic.repository.ShipmentRepository
 import com.miniwarehouse.logic.repository.StorageRepository
 import org.litepal.LitePal
 import org.litepal.extension.runInTransaction
@@ -15,7 +14,6 @@ class PackageDbOp : DbOpBase() {
 
     private val productRepository = ProductRepository()
     private val storageRepository = StorageRepository()
-    private val goodsRepository = GoodsRepository()
 
     private var productCount = 1
 
@@ -86,7 +84,7 @@ class PackageDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = goodsRepository.updateItemRepository(goods, storageItem)
+            val res2 = goods.updateNumber()
             result = result && res1 && res2
             result
         }

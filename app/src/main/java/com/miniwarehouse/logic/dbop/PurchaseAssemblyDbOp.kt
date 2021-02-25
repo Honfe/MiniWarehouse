@@ -12,7 +12,6 @@ import org.litepal.extension.runInTransaction
 class PurchaseAssemblyDbOp : DbOpBase() {
 
     private val storageRepository = StorageRepository()
-    private val assemblyRepository = AssemblyRepository()
 
     override fun prepareData() {
         storageRepository.prepareData()
@@ -50,7 +49,7 @@ class PurchaseAssemblyDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = assemblyRepository.updateItemRepository(assembly, storageItem)
+            val res2 = assembly.updateNumber()
             result = res1 && res2
             result
         }

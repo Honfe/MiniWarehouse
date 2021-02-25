@@ -14,7 +14,6 @@ class PurchaseMaterialDbOp : DbOpBase() {
 
     private val storageRepository = StorageRepository()
     private val typeRepository = MaterialTypeRepository()
-    private val materialRepository = MaterialRepository()
 
     override fun prepareData() {
         storageRepository.prepareData()
@@ -59,7 +58,7 @@ class PurchaseMaterialDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = materialRepository.updateItemRepository(material, storageItem)
+            val res2 = material.updateNumber()
             result = res1 && res2
             result
         }

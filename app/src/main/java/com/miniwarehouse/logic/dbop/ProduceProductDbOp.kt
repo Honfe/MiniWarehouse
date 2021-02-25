@@ -16,7 +16,6 @@ class ProduceProductDbOp : DbOpBase() {
 
     private val materialRepository = MaterialRepository()
     private val storageRepository = StorageRepository()
-    private val productRepository = ProductRepository()
 
     private var materialCount = 1
 
@@ -95,7 +94,7 @@ class ProduceProductDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = productRepository.updateItemRepository(product, storageItem)
+            val res2 = product.updateNumber()
             result = result && res2 && res1
             result
         }

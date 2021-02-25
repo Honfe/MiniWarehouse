@@ -16,7 +16,6 @@ class ProduceAssemblyDbOp : DbOpBase() {
 
     private val materialRepository = MaterialRepository()
     private val storageRepository = StorageRepository()
-    private val assemblyRepository = AssemblyRepository()
 
     private var materialCount = 1
 
@@ -95,7 +94,7 @@ class ProduceAssemblyDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res1 = assemblyRepository.updateItemRepository(assembly, storageItem)
+            val res1 = assembly.updateNumber()
             result = result && res1 && res2
             result
         }

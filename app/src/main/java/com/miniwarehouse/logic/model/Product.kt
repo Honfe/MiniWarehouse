@@ -1,6 +1,8 @@
 package com.miniwarehouse.logic.model
 
+import org.litepal.LitePal
 import org.litepal.crud.LitePalSupport
+import org.litepal.extension.find
 
 class Product(
     var id : Long = 0,
@@ -18,6 +20,17 @@ class Product(
             2 -> "成品"
             3 -> "货物"
             else -> "未知"
+        }
+    }
+
+    fun updateNumber(): Boolean {
+        val list = LitePal.where("name = ? and type = ? and storage_id = ?", this.name, this.type.toString(), this.storage.id.toString()).find<Product>()
+        return if (list.isEmpty()) {
+            this.save()
+        }
+        else {
+            list[0].number += this.number
+            list[0].save()
         }
     }
 

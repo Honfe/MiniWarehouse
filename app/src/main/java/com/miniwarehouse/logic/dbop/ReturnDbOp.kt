@@ -15,7 +15,6 @@ import java.sql.Date
 class ReturnDbOp : DbOpBase() {
 
     private val storageRepository = StorageRepository()
-    private val productRepository = ProductRepository()
 
     override fun prepareData() {
         storageRepository.prepareData()
@@ -63,7 +62,7 @@ class ReturnDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res1 = productRepository.updateItemRepository(product, storageItem)
+            val res1 = product.updateNumber()
             val res2 = shipment.save()
             result = res1 && res2 && res3
             result

@@ -14,7 +14,6 @@ class AssemblyDbOp : DbOpBase() {
 
     private val assemblyRepository = AssemblyRepository()
     private val storageRepository = StorageRepository()
-    private val productRepository = ProductRepository()
 
     private var assemblyCount = 1
 
@@ -85,7 +84,8 @@ class AssemblyDbOp : DbOpBase() {
                 storageItem.save()
             else
                 true
-            val res2 = productRepository.updateItemRepository(product, storageItem)
+//            val res2 = productRepository.updateItemRepository(product, storageItem)
+            val res2 = product.updateNumber()
             result = result && res1 && res2
             result
         }
